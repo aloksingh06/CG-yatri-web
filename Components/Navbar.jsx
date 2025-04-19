@@ -12,7 +12,7 @@ const Navbar = () => {
             </div>
             <div className='text-white text-xl font-semibold gap-14 flex'> 
               <Link href="/">Home</Link> 
-              <Link href="/About Us">About</Link> 
+              <Link href="/About">About</Link> 
               <Link href="/Services">Services</Link> 
               <Link href="/Plan">Plan</Link> 
               <Link href="/Community">Community</Link> 
