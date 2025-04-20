@@ -86,3 +86,66 @@ export const AboutData = [
       FullDescription:"This project is part of a structured and forward-thinking business plan, envisioned by our guiding mentor and domain expert. Our objective is to develop a smart, scalable, and user-friendly auto booking system that serves both rural and urban communities. With active support and interest from government bodies, this initiative aims to revolutionize local transportation by making it more organized, accessible, and technology-driven."
   },
 ];
+
+
+
+//blog page data
+
+export const blogData = [
+  {
+    id: 1,
+    title: "Latest Updates & Travel Tips",
+    description:
+      "Get the latest news, travel tips, and updates about smart commuting in Chhattisgarh.",
+    image:"https://images.unsplash.com/photo-1722791438165-be7cf02adad7?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHRyYXZlbCUyMGJ1c3xlbnwwfHwwfHx8MA%3D%3D"
+  },
+  {
+    id: 2,
+    title: "Latest Updates & Travel Tips",
+    description:
+      "Get the latest news, travel tips, and updates about smart commuting in Chhattisgarh.",
+   image:"https://images.unsplash.com/photo-1722791438165-be7cf02adad7?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHRyYXZlbCUyMGJ1c3xlbnwwfHwwfHx8MA%3D%3D"
+  },
+  {
+    id: 3,
+    title: "Latest Updates & Travel Tips",
+    description:
+      "Get the latest news, travel tips, and updates about smart commuting in Chhattisgarh.",
+   image:"https://images.unsplash.com/photo-1722791438165-be7cf02adad7?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHRyYXZlbCUyMGJ1c3xlbnwwfHwwfHx8MA%3D%3D"
+  },
+  {
+    id: 4,
+    title: "Latest Updates & Travel Tips",
+    description:
+      "Get the latest news, travel tips, and updates about smart commuting in Chhattisgarh.",
+   image:"https://images.unsplash.com/photo-1722791438165-be7cf02adad7?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHRyYXZlbCUyMGJ1c3xlbnwwfHwwfHx8MA%3D%3D"
+  },
+  {
+    id: 5,
+    title: "Latest Updates & Travel Tips",
+    description:
+      "Get the latest news, travel tips, and updates about smart commuting in Chhattisgarh.",
+   image:"https://images.unsplash.com/photo-1722791438165-be7cf02adad7?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHRyYXZlbCUyMGJ1c3xlbnwwfHwwfHx8MA%3D%3D"
+  },
+  {
+    id: 6,
+    title: "Latest Updates & Travel Tips",
+    description:
+      "Get the latest news, travel tips, and updates about smart commuting in Chhattisgarh.",
+   image:"https://images.unsplash.com/photo-1722791438165-be7cf02adad7?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHRyYXZlbCUyMGJ1c3xlbnwwfHwwfHx8MA%3D%3D"
+  },
+  {
+    id: 7,
+    title: "Latest Updates & Travel Tips",
+    description:
+      "Get the latest news, travel tips, and updates about smart commuting in Chhattisgarh.",
+   image:"https://images.unsplash.com/photo-1722791438165-be7cf02adad7?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHRyYXZlbCUyMGJ1c3xlbnwwfHwwfHx8MA%3D%3D"
+  },
+  {
+    id: 8,
+    title: "Latest Updates & Travel Tips",
+    description:
+      "Get the latest news, travel tips, and updates about smart commuting in Chhattisgarh.",
+   image:"https://images.unsplash.com/photo-1722791438165-be7cf02adad7?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHRyYXZlbCUyMGJ1c3xlbnwwfHwwfHx8MA%3D%3D"
+  },
+]
