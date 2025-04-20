@@ -2,7 +2,8 @@ import React from 'react'
 
 const Homepage2 = () => {
   return (
-    <div className=" rounded-3xl mt-20 p-10  sm:p-10 md:p-16 flex flex-col md:flex-row items-center md:items-start justify-between ">
+    <div className='py-16 px-16 sm:px-6 md:px-26'>
+      <div className=" rounded-3xl mt-20 p-10  sm:p-10 md:p-16 flex flex-col md:flex-row items-center md:items-start justify-between ">
         
         {/* Left Side Content */}
         <div className="md:w-1/2 w-full space-y-6 text-center md:text-left">
@@ -35,6 +36,7 @@ const Homepage2 = () => {
           </div>
         </div>
       </div>
+    </div>
   )
 }
 
