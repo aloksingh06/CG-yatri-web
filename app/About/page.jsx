@@ -1,4 +1,5 @@
 import React from "react";
+import FooterSection from "../Components/FooterSection";
 
 const About = () => {
   return (
@@ -81,6 +82,9 @@ const About = () => {
           </div>
           <div className="w-[418px] h-[424px] bg-gray-300 rounded-[29px] mx-auto md:mx-0"></div>
         </div>
+      </section>
+      <section>
+        <FooterSection />
       </section>
     </div>
   );
