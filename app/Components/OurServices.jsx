@@ -1,5 +1,5 @@
 import React from 'react'
-import autoimage from '../Images/autoimage.jpg'
+import autoimage from '../images/autoimage.jpg'
 import { servicesData } from "../data"
 import Image from 'next/image'
 

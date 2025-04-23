@@ -1,4 +1,5 @@
 import React from "react";
+import FooterSection from "../Components/FooterSection";
 
 const About = () => {
   return (
@@ -152,6 +153,9 @@ const About = () => {
   </div>
 </section>
 
+      <section>
+        <FooterSection />
+      </section>
 
     </div>
   );

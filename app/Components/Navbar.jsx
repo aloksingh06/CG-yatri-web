@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from 'react'
-import logo from '../Images/logo.png'
+import logo from '../images/logo.png'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Menu, X } from 'lucide-react' // Optional: Lucide for icons (install with `npm i lucide-react`)
