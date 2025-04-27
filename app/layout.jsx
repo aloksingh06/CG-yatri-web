@@ -1,6 +1,8 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/app/Components/Navbar";
+import { Providers } from "./Providers";
+import ToastProvider from "@/app/ToastProvider"; // 👈 ToastProvider import किया
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -21,8 +23,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
+        <Providers>
+          <ToastProvider> {/* 👈 ToastProvider से wrap कर दिया */}
         <Navbar />
-        {children}
+            {children}
+          </ToastProvider>
+        </Providers>
       </body>
     </html>
   );

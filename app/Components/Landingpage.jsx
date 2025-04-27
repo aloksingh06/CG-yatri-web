@@ -3,16 +3,14 @@ import React from "react";
 import Image from "next/image";
 // import autoImage from '../images/auto-ride.png' // Yeh tumhara Auto waala image import kar lena
 import { motion } from "framer-motion";
-import { Download} from "lucide-react";
+import { Download } from "lucide-react";
 import { useRouter } from "next/navigation";
-
-
 
 const LandingPage = () => {
   const router = useRouter();
 
   return (
-    <section className="min-h-screen flex flex-col  md:flex-row items-center justify-around px-6 md:px-16 bg-blue-600 overflow-hidden">
+    <section className="min-h-screen flex flex-col md:flex-row items-center justify-around px-6 md:px-16 bg-blue-600 overflow-hidden">
       {/* Left Content */}
       <motion.div
         initial={{ x: -100, opacity: 0 }}
@@ -24,7 +22,7 @@ const LandingPage = () => {
           Travel Smart in <br /> Chhattisgarh
         </h1>
         <p className="text-gray-100 text-lg md:text-xl">
-        Book buses, autos, taxis, and cabs easily. Track live locations, explore routes, and travel smarter with CG Yatri.
+          Book buses, autos, taxis, and cabs easily. Track live locations, explore routes, and travel smarter with CG Yatri.
         </p>
 
         {/* Options Buttons */}
@@ -41,22 +39,26 @@ const LandingPage = () => {
 
         {/* Action Buttons */}
         <div className="flex gap-4 flex-wrap justify-center md:justify-start">
-           {/* Download App Button */}
-           <a
-                href="/dummy-app-link.apk" // <-- Dummy download link
-                download
-                className="flex items-center gap-2 bg-[#1400AE] hover:bg-[#100092] text-white font-semibold py-3 px-6 rounded-xl shadow transition"
-              >
-                <Download size={20} />
-                Download App
-              </a>
+          {/* Download App Button */}
+          <a
+            href="/dummy-app-link.apk" // <-- Dummy download link
+            download
+            className="flex items-center gap-2 bg-[#1400AE] hover:bg-[#100092] text-white font-semibold py-3 px-6 rounded-xl shadow transition"
+          >
+            <Download size={20} />
+            Download App
+          </a>
           <button
-          onClick={() => router.push('/Services')}
-           className="bg-[#1400AE] text-white px-6 py-3 rounded-xl font-semibold hover:bg-[#100092] transition-colors duration-300">
+            onClick={() => router.push('/Services')}
+            className="bg-[#1400AE] text-white px-6 py-3 rounded-xl font-semibold hover:bg-[#100092] transition-colors duration-300"
+          >
             Explore Services
           </button>
         </div>
       </motion.div>
+
+      {/* Right Side Image Box */}
+      
 
       {/* Right Side Image */}
       <motion.div
