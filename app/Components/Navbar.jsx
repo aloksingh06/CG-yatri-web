@@ -3,29 +3,49 @@ import React, { useState } from 'react'
 import logo from '../images/logo.png'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Menu, X } from 'lucide-react' // Optional: Lucide for icons (install with `npm i lucide-react`)
+import { Menu, X } from 'lucide-react'
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const [activeLink, setActiveLink] = useState('') // Active link ko track karenge
+
+  const handleLinkClick = (link) => {
+    setActiveLink(link)
+    setIsOpen(false)
+  }
 
   return (
-    <nav className='bg-[#011D3D]'>
-      <div className='max-w-[1440px] mx-auto px-6 md:px-10 py-4 flex items-center justify-between'>
+    <nav className='bg-[#1400AE] fixed top-0 w-full z-50'>
+      <div className='max-w-[1440px] mx-auto px-6 md:px-10 py-3 flex items-center justify-between'>
         {/* Logo */}
         <div className='flex items-center gap-2'>
           <Image className='w-12 h-12' src={logo} alt="Logo" />
-          <span className='text-white text-2xl font-semibold hidden sm:inline-block'>CG Yatri</span>
         </div>
 
         {/* Desktop Links */}
-        <div className='hidden md:flex gap-10 text-white text-lg font-medium'>
-          <Link href="/">Home</Link>
-          <Link href="/About">About</Link>
-          <Link href="/Services">Services</Link>
-          <Link href="/Plan">Plan</Link>
-          <Link href="/Blog">Blog</Link>
-          <Link href="/Community">Community</Link>
-          <Link href="/Contact">Contact Us</Link>
+        <div className='hidden md:flex gap-8 text-white text-lg font-medium'>
+          {[
+            { name: 'Home', path: '/' },
+            { name: 'About', path: '/About' },
+            { name: 'Services', path: '/Services' },
+            { name: 'Plan', path: '/Plan' },
+            { name: 'Blog', path: '/Blog' },
+            { name: 'Community', path: '/Community' },
+            { name: 'Contact Us', path: '/Contact' }
+          ].map((item) => (
+            <Link
+              key={item.name}
+              href={item.path}
+              onClick={() => handleLinkClick(item.name)}
+              className={`px-4 py-2 rounded-full transition-all duration-200 ${
+                activeLink === item.name 
+                  ? 'bg-gray-100 text-[#1400AE]' 
+                  : 'text-white hover:bg-gray-100 hover:text-[#1400AE]'
+              }`}
+            >
+              {item.name}
+            </Link>
+          ))}
         </div>
 
         {/* Hamburger Menu */}
@@ -39,13 +59,28 @@ const Navbar = () => {
       {/* Mobile Links */}
       {isOpen && (
         <div className='md:hidden bg-[#011D3D] px-6 pb-4 flex flex-col gap-4 text-white text-base font-medium'>
-          <Link href="/" onClick={() => setIsOpen(false)}>Home</Link>
-          <Link href="/About" onClick={() => setIsOpen(false)}>About</Link>
-          <Link href="/Services" onClick={() => setIsOpen(false)}>Services</Link>
-          <Link href="/Plan" onClick={() => setIsOpen(false)}>Plan</Link>
-          <Link href="/Blog" onClick={() => setIsOpen(false)}>Blog</Link>
-          <Link href="/Community" onClick={() => setIsOpen(false)}>Community</Link>
-          <Link href="/Contact" onClick={() => setIsOpen(false)}>Contact Us</Link>
+          {[
+            { name: 'Home', path: '/' },
+            { name: 'About', path: '/About' },
+            { name: 'Services', path: '/Services' },
+            { name: 'Plan', path: '/Plan' },
+            { name: 'Blog', path: '/Blog' },
+            { name: 'Community', path: '/Community' },
+            { name: 'Contact Us', path: '/Contact' }
+          ].map((item) => (
+            <Link
+              key={item.name}
+              href={item.path}
+              onClick={() => handleLinkClick(item.name)}
+              className={`px-4 py-2 rounded-full transition-all duration-200 ${
+                activeLink === item.name 
+                  ? 'bg-gray-100 text-[#1400AE]' 
+                  : 'text-white hover:bg-gray-100 hover:text-[#1400AE]'
+              }`}
+            >
+              {item.name}
+            </Link>
+          ))}
         </div>
       )}
     </nav>

@@ -1,50 +1,80 @@
-import React from 'react'
+"use client";
+import React from "react";
+import Image from "next/image";
+// import autoImage from '../images/auto-ride.png' // Yeh tumhara Auto waala image import kar lena
+import { motion } from "framer-motion";
+import { Download} from "lucide-react";
+import { useRouter } from "next/navigation";
 
-const Landingpage = () => {
+
+
+const LandingPage = () => {
+  const router = useRouter();
+
   return (
-  <div className='py-16 px-16 sm:px-6 md:px-26'>
-      <div className="bg-[#9cd6ff] rounded-3xl p-10 sm:p-10 md:p-20 flex flex-col md:flex-row items-center md:items-start justify-between ">
-        
-        {/* Left Side Content */}
-        <div className="md:w-1/2 w-full space-y-6 text-center md:text-left">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-black leading-tight">
-            Travel Smart in <br className="hidden sm:block" /> Chhattisgarh
-          </h1>
-          <p className="text-base sm:text-lg text-gray-800">
-            Book buses, Auto, Taxi, cab, track live locations & <br />explore routes easily
-          </p>
+    <section className="min-h-screen flex flex-col  md:flex-row items-center justify-around px-6 md:px-16 bg-blue-600 overflow-hidden">
+      {/* Left Content */}
+      <motion.div
+        initial={{ x: -100, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        className="flex flex-col items-center md:items-start text-center md:text-left gap-6 max-w-xl"
+      >
+        <h1 className="text-4xl md:text-5xl font-bold text-white leading-tight">
+          Travel Smart in <br /> Chhattisgarh
+        </h1>
+        <p className="text-gray-100 text-lg md:text-xl">
+        Book buses, autos, taxis, and cabs easily. Track live locations, explore routes, and travel smarter with CG Yatri.
+        </p>
 
-          {/* Light Rounded Buttons */}
-          <div className="flex justify-center md:justify-start flex-wrap gap-4">
-            <div className="bg-[#add9ff] w-16 h-10 rounded-full"></div>
-            <div className="bg-[#add9ff] w-16 h-10 rounded-full"></div>
-            <div className="bg-[#add9ff] w-16 h-10 rounded-full"></div>
-          </div>
-
-          {/* CTA Buttons */}
-          <div className="flex justify-center md:justify-start flex-wrap gap-4 pt-2">
-            <button className="bg-[#1296f5] text-white px-6 py-3 rounded-md shadow-md text-sm sm:text-base">
-              Get Started
+        {/* Options Buttons */}
+        <div className="flex gap-4 flex-wrap justify-center md:justify-start">
+          {["Auto", "Cab", "Bus"].map((item) => (
+            <button
+              key={item}
+              className="bg-gray-100 text-black border-1 rounded-full px-6 py-2 font-semibold hover:scale-105 transition-transform duration-300"
+            >
+              {item}
             </button>
-            <button className="bg-[#1296f5] text-white px-6 py-3 rounded-md shadow-md text-sm sm:text-base">
-              Learn More
-            </button>
-          </div>
+          ))}
         </div>
 
-        {/* Right Side Image Box */}
-        <div className="md:w-1/2 w-full flex justify-center">
-          <div className="bg-white w-[100%] sm:w-[30vw] h-[30vw] sm:h-[30vw] rounded-3xl shadow-md flex items-center justify-center">
-            {/* Replace this with actual image if needed */}
-            <span className="text-gray-400">Image here</span>
-            {/* Example:
-            <Image src="/bus-map.png" alt="Map" width={300} height={300} className="rounded-3xl object-cover" />
-            */}
-          </div>
+        {/* Action Buttons */}
+        <div className="flex gap-4 flex-wrap justify-center md:justify-start">
+           {/* Download App Button */}
+           <a
+                href="/dummy-app-link.apk" // <-- Dummy download link
+                download
+                className="flex items-center gap-2 bg-[#1400AE] hover:bg-[#100092] text-white font-semibold py-3 px-6 rounded-xl shadow transition"
+              >
+                <Download size={20} />
+                Download App
+              </a>
+          <button
+          onClick={() => router.push('/Services')}
+           className="bg-[#1400AE] text-white px-6 py-3 rounded-xl font-semibold hover:bg-[#100092] transition-colors duration-300">
+            Explore Services
+          </button>
         </div>
-      </div>
-  </div>
-  )
-}
+      </motion.div>
 
-export default Landingpage
+      {/* Right Side Image */}
+      <motion.div
+        initial={{ x: 100, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        className="mt-10 md:mt-0"
+      >
+        <Image
+          src="/images/homeimg.svg"
+          alt="Auto Ride"
+          width={500}
+          height={300}
+          className="w-full max-w-md"
+        />
+      </motion.div>
+    </section>
+  );
+};
+
+export default LandingPage;

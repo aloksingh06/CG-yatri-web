@@ -12,14 +12,14 @@ import FooterSection from './Components/FooterSection'
 const Home = () => {
   return (
    
-    <div className="bg-gradient-to-b from-[#edf6fe] to-[#b3dfff]  ">
+    <div className="bg-gray-100  ">
       <Landingpage />
       <Homepage2 />
-      <OurServices />
-      <QualitySection />
-      <WorkflowSection />
-      <JoinSection />
-      <AboutSection />
+      {/* <OurServices /> */}
+      {/* <QualitySection /> */}
+      {/* <WorkflowSection /> */}
+      {/* <JoinSection /> */}
+      {/* <AboutSection /> */}
       <FooterSection />
     </div>
     
