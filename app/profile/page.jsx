@@ -50,11 +50,8 @@ router.push("/");  // Login page pe le jao
             <span className="text-gray-900">{user.number}</span>
           </div>
 
-          <div className="flex justify-between">
-            <span className="text-gray-700 font-medium">City:</span>
-            <span className="text-gray-900">{user.city}</span>
-          </div>
-          <div>
+          
+          <div className="flex justify-center">
             <button onClick={logout} className="bg-red-400 p-2 rounded-md" >Log Out</button>
           </div>
         </div>
