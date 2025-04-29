@@ -80,7 +80,7 @@ const Footer = () => {
         <div>
           <h3 className="text-lg font-bold mb-4">Services</h3>
           <ul className="space-y-2 text-gray-300">
-            <li className="hover:underline cursor-pointer" onClick={() => router.push("/city-buses")}>City Buses</li>
+          <li className="hover:underline cursor-pointer" onClick={() => router.push("/city-buses")}>City Buses</li>
             <li className="hover:underline cursor-pointer" onClick={() => router.push("/auto-rickshaws")}>Auto Rickshaws</li>
             <li className="hover:underline cursor-pointer" onClick={() => router.push("/premium-cabs")}>Premium Cabs</li>
             <li className="hover:underline cursor-pointer" onClick={() => router.push("/monthly-passes")}>Monthly Passes</li>
