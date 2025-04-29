@@ -3,7 +3,7 @@ import { AuthContext } from "../Context/AuthContext";
 
 import Login from "./Login";
 import OtpVerification from "./OtpVerification";
-import RegisterOtp from "./RegisteOtp";
+import RegisterOtp from "./RegisterOtp";
 import UserDetail from "./UserDetail";
 import Register from "./Register";
 
