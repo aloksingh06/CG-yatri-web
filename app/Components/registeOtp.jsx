@@ -8,7 +8,7 @@ import api from "@/utils/api";
 import { motion } from "framer-motion";
 
 import logo from "@/app/images/logo-png.png"
-
+// this page for otp verification for register form
 const RegisterOtp = () => {
   const { setIsAuthenticated, setUser, name, number, role, setpopUpPage, user } = useContext(AuthContext);
   const router = useRouter();
