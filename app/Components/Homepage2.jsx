@@ -27,19 +27,19 @@ const BookRideSection = () => {
   const services = [
     {
       name: "City Bus",
-      logo: "/images/busLogo.jpg", // Replace with actual logo URL
+      logo: "/images/busLogo.jpg", 
     },
     {
       name: "Auto Rickshaw",
-      logo: "/path/to/auto-rickshaw-logo.png", // Replace with actual logo URL
+      logo: "/path/to/auto-rickshaw-logo.png", 
     },
     {
       name: "Cab",
-      logo: "/path/to/cab-logo.png", // Replace with actual logo URL
+      logo: "/path/to/cab-logo.png", 
     },
     {
       name: "Bike",
-      logo: "/path/to/bike-logo.png", // Replace with actual logo URL
+      logo: "/path/to/bike-logo.png", 
     },
     {
       name: "Freight Mover",

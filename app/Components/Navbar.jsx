@@ -6,7 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Menu, X, User } from "lucide-react";
 import { AuthContext } from "@/app/Context/AuthContext";
-import { usePathname } from "next/navigation"; // Import for current route
+import { usePathname } from "next/navigation";
 import OurServices from "./OurServices";
 import Login from "./Login";
 import Register from "./Register";
@@ -19,7 +19,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
-  const pathname = usePathname(); // Current page ka path
+  const pathname = usePathname(); 
   const [model, setmodel] = useState(false);
   const [pageOpen, setpageOpen] = useState(false)
 
@@ -45,11 +45,11 @@ const Navbar = () => {
     return null;
   }
 
-  // Function to set active link styling
+  
   const getLinkClass = (path) => {
     return pathname === path 
-      ? "text-yellow-300 underline underline-offset-8" // Active page style
-      : "hover:text-yellow-200"; // Normal hover effect
+      ? "text-yellow-300 underline underline-offset-8" 
+      : "hover:text-yellow-200"; 
   };
 
   const popUpOpen = (type)=>{
@@ -61,7 +61,7 @@ const Navbar = () => {
     <>
     <nav className="bg-[#1400AE] fixed top-0 w-full z-40">
       <div className='max-w-[1440px] mx-auto px-6 md:px-10 py-3 flex items-center justify-between'>
-        {/* Logo */}
+        
         <div className='flex items-center gap-2'>
           <Image className='w-12 h-12' src={logo} alt="Logo" />
         </div>
