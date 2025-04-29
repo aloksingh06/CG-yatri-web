@@ -10,13 +10,16 @@ const Profile = () => {
   const { user, isAuthenticated } = useContext(AuthContext);
   const router = useRouter();
 
+
+ 
   const logout = async () => {
     await api
       .get("/user/logout")
       .then((res) => {
         toast.success(res.data.message);
         setUser(null);
-        setIsAuthenticated(false);       
+        setIsAuthenticated(false);    
+        console.log("log out")   
 router.push("/");  // Login page pe le jao
 
       })

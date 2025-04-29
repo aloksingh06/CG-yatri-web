@@ -15,15 +15,17 @@ import api from '@/utils/api'
 
 
 const Home = () => {
-  const { setIsAuthenticated, setUser } = useContext(AuthContext);
+  const { setIsAuthenticated, setUser, isAuthenticated } = useContext(AuthContext);
 
   useEffect(() => {
     const getUser = async () => {
       await api
         .get("/user/me")
         .then((res) => {
+          
           setUser(res.data.user);
           setIsAuthenticated(true);
+         
         })
         .catch((err) => {
           setUser(null);

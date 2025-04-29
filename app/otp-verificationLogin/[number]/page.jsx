@@ -71,7 +71,7 @@ console.log("Number from params:", number);
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100 px-4">
+    <div className="flex items-center justify-center min-h-screen bg-zinc-900/50  backdrop-blur-sm px-4">
       <div className="bg-white p-8 rounded-xl shadow-md w-full max-w-md">
         <h1 className="text-2xl font-bold mb-2 text-center">OTP Verification</h1>
         <p className="text-sm text-gray-600 text-center mb-4">

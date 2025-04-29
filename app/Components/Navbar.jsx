@@ -1,26 +1,65 @@
 "use client";
 
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, useRef } from "react";
 import logo from "../images/logo.png";
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, X } from "lucide-react";
+import { Menu, X, User } from "lucide-react";
 import { AuthContext } from "@/app/Context/AuthContext";
+import { usePathname } from "next/navigation"; // Import for current route
+import OurServices from "./OurServices";
+import Login from "./Login";
+import Register from "./Register";
+import Modal from "./Modal";
+import { useRouter } from "next/navigation";
+
 
 const Navbar = () => {
-  const { isAuthenticated, user, loading } = useContext(AuthContext);
+  const { isAuthenticated, user, loading, popUpPage, setpopUpPage } = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+  const pathname = usePathname(); // Current page ka path
+  const [model, setmodel] = useState(false);
+  const [pageOpen, setpageOpen] = useState(false)
+
+
 
   useEffect(() => {
     console.log("Navbar me isAuthenticated:", isAuthenticated);
   }, [isAuthenticated]);
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   if (loading) {
-    return null; // <-- Jab tak localStorage se data nahi aata, kuch mat dikhao
+    return null;
   }
 
+  // Function to set active link styling
+  const getLinkClass = (path) => {
+    return pathname === path 
+      ? "text-yellow-300 underline underline-offset-8" // Active page style
+      : "hover:text-yellow-200"; // Normal hover effect
+  };
+
+  const popUpOpen = (type)=>{
+    setpopUpPage(type)
+    setDropdownOpen(false)
+  }
+  const router = useRouter();
   return (
-    <nav className="bg-[#1400AE] fixed top-0 w-full z-50">
+    <>
+    <nav className="bg-[#1400AE] fixed top-0 w-full z-40">
       <div className='max-w-[1440px] mx-auto px-6 md:px-10 py-3 flex items-center justify-between'>
         {/* Logo */}
         <div className='flex items-center gap-2'>
@@ -28,23 +67,50 @@ const Navbar = () => {
         </div>
 
         {/* Desktop Links */}
-        <div className="hidden md:flex gap-10 text-white text-lg font-medium">
-          <Link href="/">Home</Link>
-          <Link href="/About">About</Link>
-          <Link href="/Services">Services</Link>
-          <Link href="/Plan">Plan</Link>
-          <Link href="/Blog">Blog</Link>
-          <Link href="/Community">Community</Link>
-          <Link href="/Contact">Contact Us</Link>
+        <div className="hidden md:flex gap-10 text-white text-lg font-medium items-center">
+          <Link href="/" className={getLinkClass("/")}>Home</Link>
+          <Link href="/About" className={getLinkClass("/About")}>About</Link>
+          <Link href="/Services" className={getLinkClass("/Services")}>Services</Link>
+          <Link href="/Plan" className={getLinkClass("/Plan")}>Plan</Link>
+          <Link href="/Blog" className={getLinkClass("/Blog")}>Blog</Link>
+          <Link href="/Community" className={getLinkClass("/Community")}>Community</Link>
+          <Link href="/Contact" className={getLinkClass("/Contact")}>Contact Us</Link>
 
-          {!isAuthenticated ? (
-            <>
-              <Link href="/Register">Register</Link>
-              <Link href="/Login">Login</Link>
-            </>
-          ) : (
-            <Link href="/profile">Profile</Link>
-          )}
+          {/* Profile Icon */}
+          <div className="relative" ref={dropdownRef}>
+            <button
+              onClick={() => {
+                if (isAuthenticated) {
+                  router.push("/profile")
+                } else {
+                  setDropdownOpen((prev) => !prev);
+                }
+              }}
+              className="flex items-center gap-2 bg-white text-[#1400AE] p-2 rounded-full hover:bg-gray-200 transition"
+            >
+              <User size={24} />
+            </button>
+
+            {/* Dropdown */}
+            {!isAuthenticated && dropdownOpen && (
+              <div className="absolute right-0 mt-2 w-36 bg-white rounded-md shadow-lg py-2">
+                <div
+                  href="/Register"
+                  className="block px-4 py-2 text-[#1400AE] hover:bg-gray-100"
+                  onClick={() => popUpOpen("register")}
+                >
+                  Register
+                </div>
+                <div
+                  
+                  className="block px-4 py-2 text-[#1400AE] hover:bg-gray-100"
+                  onClick={() =>popUpOpen("login") }
+                >
+                  Login
+                </div>
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Hamburger Menu */}
@@ -61,13 +127,13 @@ const Navbar = () => {
       {/* Mobile Links */}
       {isOpen && (
         <div className="md:hidden bg-[#011D3D] px-6 pb-4 flex flex-col gap-4 text-white text-base font-medium">
-          <Link href="/" onClick={() => setIsOpen(false)}>Home</Link>
-          <Link href="/About" onClick={() => setIsOpen(false)}>About</Link>
-          <Link href="/Services" onClick={() => setIsOpen(false)}>Services</Link>
-          <Link href="/Plan" onClick={() => setIsOpen(false)}>Plan</Link>
-          <Link href="/Blog" onClick={() => setIsOpen(false)}>Blog</Link>
-          <Link href="/Community" onClick={() => setIsOpen(false)}>Community</Link>
-          <Link href="/Contact" onClick={() => setIsOpen(false)}>Contact Us</Link>
+          <Link href="/" className={getLinkClass("/")} onClick={() => setIsOpen(false)}>Home</Link>
+          <Link href="/About" className={getLinkClass("/About")} onClick={() => setIsOpen(false)}>About</Link>
+          <Link href="/Services" className={getLinkClass("/Services")} onClick={() => setIsOpen(false)}>Services</Link>
+          <Link href="/Plan" className={getLinkClass("/Plan")} onClick={() => setIsOpen(false)}>Plan</Link>
+          <Link href="/Blog" className={getLinkClass("/Blog")} onClick={() => setIsOpen(false)}>Blog</Link>
+          <Link href="/Community" className={getLinkClass("/Community")} onClick={() => setIsOpen(false)}>Community</Link>
+          <Link href="/Contact" className={getLinkClass("/Contact")} onClick={() => setIsOpen(false)}>Contact Us</Link>
 
           {!isAuthenticated ? (
             <>
@@ -80,6 +146,13 @@ const Navbar = () => {
         </div>
       )}
     </nav>
+
+    {popUpPage && ( <div className="fixed top-0 w-full z-50 bg-opacity-50">
+     
+     <Modal />
+    </div>
+    )  }
+    </>
   );
 };
 
