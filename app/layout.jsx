@@ -24,7 +24,7 @@ export default function RootLayout({ children }) {
     <html lang="en" suppressHydrationWarning>
       <body>
         <Providers>
-          <ToastProvider> {/* 👈 ToastProvider से wrap कर दिया */}
+          <ToastProvider> 
         <Navbar />
             {children}
           </ToastProvider>

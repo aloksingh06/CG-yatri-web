@@ -102,9 +102,8 @@ const HeroSection = () => {
       </section>
 
       {/* 2nd section  */}
-      <section className="py-16 px-6 md:px-20  text-blue-900">
+      {/* <section className="py-16 px-6 md:px-20  text-blue-900">
         <div className="max-w-7xl mx-auto text-center">
-          {/* Heading */}
           <motion.h2
             initial={{ opacity: 0, y: -30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -115,7 +114,6 @@ const HeroSection = () => {
             Why Choose CG Yatri?
           </motion.h2>
 
-          {/* Subheading */}
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -127,7 +125,6 @@ const HeroSection = () => {
             features designed to make your journey seamless.
           </motion.p>
 
-          {/* Features Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {features.map((feature, index) => (
               <motion.div
@@ -145,7 +142,7 @@ const HeroSection = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* 3rd section  */}
       <section className="bg-blue-600 text-white py-16 px-6 md:px-20">

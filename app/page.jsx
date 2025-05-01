@@ -10,7 +10,7 @@ import AboutSection from './Components/AboutSection'
 import FooterSection from './Components/FooterSection'
 import { AuthContext } from './Context/AuthContext'
 import Login from './Login/page'
-import axios from 'axios'
+// import axios from 'axios'
 import api from '@/utils/api'
 
 
@@ -38,7 +38,7 @@ const Home = () => {
   }, []);
   return (
    
-    <div className="bg-gray-100  ">
+    <div className=" bg-blue-100 w-full">
       <Landingpage />
       <Homepage2 />
       {/* <OurServices /> */}

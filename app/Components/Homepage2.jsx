@@ -1,6 +1,7 @@
 "use client";
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useState, useRef } from "react";
+
+import { motion, AnimatePresence } from "framer-motion";
 import {
   FaMapMarkerAlt,
   FaFlag,
@@ -12,6 +13,7 @@ import {
   FaChargingStation,
   FaParking,
   FaTaxi,
+  FaSearch,
 } from "react-icons/fa";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
@@ -20,52 +22,105 @@ import { HiSelector } from "react-icons/hi";
 import { useRouter } from "next/navigation";
 import ServiceProviderModal from "./ServiceProviderModal";
 
+const RAIPUR_ROUTES = [
+  "Raipur Railway Station",
+  "Swami Vivekanand Airport",
+  "Telibandha",
+  "Pandri Market",
+  "Shankar Nagar",
+  "Kachna Road",
+  "Amlidih",
+  "Mowa",
+  "VIP Road",
+  "Devendra Nagar",
+];
+const SERVICES = [
+  {
+    name: "City Bus",
+    icon: <FaBus size={32} />,
+    description: "Book autos easily and affordably for short trips.",
+  },
+  {
+    name: "Auto Rickshaw",
+    icon: <FaCarSide size={32} />,
+    description: "Book autos easily and affordably for short trips.",
+  },
+  {
+    name: "Cab",
+    icon: <FaTaxi size={32} />,
+    description: "Book autos easily and affordably for short trips.",
+  },
+  {
+    name: "Bike",
+    icon: <FaMotorcycle size={32} />,
+    description: "Book autos easily and affordably for short trips.",
+  },
+  {
+    name: "Rental Services",
+    icon: <FaCarSide size={32} />,
+    description: "Rent vehicles for hours or days at best prices.",
+  },
+  {
+    name: "Freight Mover",
+    icon: <FaTruckMoving size={32} />,
+    description: "Book autos easily and affordably for short trips.",
+  },
+
+  {
+    name: "Packers & Movers",
+    icon: <FaBoxOpen size={32} />,
+    description: "Book autos easily and affordably for short trips.",
+  },
+  {
+    name: "EV Charging",
+    icon: <FaChargingStation size={32} />,
+    description: "Book autos easily and affordably for short trips.",
+  },
+  {
+    name: "Parking",
+    icon: <FaParking size={32} />,
+    description: "Book autos easily and affordably for short trips.",
+  },
+];
+
+// FAQs
+const faqData = [
+  {
+    question: "When will the app be launched and who owns the CG Yatri app?",
+    answer:
+      "App will launch soon - signup . App will be made and operated by Innovara Megacorp LLP , Company based in Raipur.  It will have important stakeholders and community enablers like Driver unions, Transport authority etc.",
+  },
+  {
+    question:
+      "How is CG Yatri helpful and how is it different from other ride apps?",
+    answer:
+      "For commuters - CG Yatri is a government-supported mobility app for Chhattisgarh that lets you book autos, buses, cabs, and more — with zero commission and fixed fares. Drivers earn more, and you pay less. For Service providers - CG Yatri brings all service providers on one platform, boosting visibility and business — no need for ads, just more customers.Want to advertise? Put your brand on city autos and help drivers earn more.  ",
+  },
+  {
+    question: "Can I track public transport like city buses in real-time?",
+    answer:
+      "Yes! You’ll be able to track city buses live on the map, see estimated arrival times, and plan your travel better.",
+  },
+  {
+    question: "How is fare decided. Is CG Yatri cheaper?",
+    answer:
+      "Yes, fares are fixed by the government — no surge pricing, no hidden charges, same rate chart for drivers and users. What you see is what you pay.All fares are based on official government rates decided by consulting union drivers and transport experts. No interference by private apps or middlemen.",
+  },
+  {
+    question: "Do I have to pay extra charges apart from the fare? ",
+    answer:
+      "No. You pay only the fixed fare — no extra charges, no commission fees.In case of tolls and parking charges being levied you might have to pay that.",
+  },
+  {
+    question: "What modes of transport are available on CG Yatri?",
+    answer:
+      "There will be an in-app support option. Just tap “Report Issue” after the ride, and our team will help you right away.",
+  },
+];
+
 const BookRideSection = () => {
-  const [pickup, setPickup] = useState("");
-  const [destination, setDestination] = useState("");
-
-  const services = [
-    {
-      name: "City Bus",
-      logo: "/images/busLogo.jpg", 
-    },
-    {
-      name: "Auto Rickshaw",
-      logo: "/path/to/auto-rickshaw-logo.png", 
-    },
-    {
-      name: "Cab",
-      logo: "/path/to/cab-logo.png", 
-    },
-    {
-      name: "Bike",
-      logo: "/path/to/bike-logo.png", 
-    },
-    {
-      name: "Freight Mover",
-      logo: "/path/to/freight-mover-logo.png", // Replace with actual logo URL
-    },
-    {
-      name: "Packers & Movers",
-      logo: "/path/to/packers-movers-logo.png", // Replace with actual logo URL
-    },
-    {
-      name: "EV Charging",
-      logo: "/path/to/ev-charging-logo.png", // Replace with actual logo URL
-    },
-    {
-      name: "Parking",
-      logo: "/path/to/parking-logo.png", // Replace with actual logo URL
-    },
-  ];
-
-  const handleFindRide = () => {
-    if (pickup && destination) {
-      alert(`Finding rides from ${pickup} to ${destination}`);
-    } else {
-      alert("Please enter both Pickup and Destination!");
-    }
-  };
+ 
+  
 
   const routes = [
     {
@@ -113,17 +168,7 @@ const BookRideSection = () => {
     },
   ];
 
-  const locations = [
-    "Railway Station",
-    "Airport",
-    "Pandri",
-    "Telibandha",
-    "Shankar Nagar",
-    "Amanaka",
-    "Gudiyari",
-    "Sadar Bazar",
-  ];
-
+ 
   const services2 = [
     {
       title: "Auto Services",
@@ -182,42 +227,7 @@ const BookRideSection = () => {
   ];
   const router = useRouter();
 
-  const fares = [
-    {
-      type: "City Bus",
-      icon: <FaBus className="text-green-500" size={24} />,
-      price: "₹15-25",
-      wait: "15-10 min wait",
-    },
-    {
-      type: "Auto Rickshaw",
-      icon: <FaMotorcycle className="text-yellow-400" size={24} />,
-      price: "₹80-120",
-      wait: "5-10 min wait",
-    },
-    {
-      type: "Premium Cab",
-      icon: <FaTaxi className="text-blue-400" size={24} />,
-      price: "₹180-300",
-      wait: "5-15 min wait",
-    },
-  ];
-
-  const [from, setFrom] = useState(locations[0]);
-  const [to, setTo] = useState(locations[1]);
-  const [selectedFare, setSelectedFare] = useState(null);
-  const [loading, setLoading] = useState(false);
-
-  const handleBookRide = () => {
-    if (!selectedFare) return;
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      alert(`Booking from ${from} to ${to} by ${selectedFare.type} confirmed!`);
-      setSelectedFare(null); // Reset after booking
-    }, 1500);
-  };
-
+ 
   const features = [
     {
       title: "Affordable Pricing",
@@ -258,6 +268,24 @@ const BookRideSection = () => {
       feedback:
         "Moved my entire office using their packers & movers service. Professional and efficient.",
     },
+    {
+      name: "Amit Patel",
+      rating: 5,
+      feedback:
+        "Moved my entire office using their packers & movers service. Professional and efficient.",
+    },
+    {
+      name: "Amit Patel",
+      rating: 5,
+      feedback:
+        "Moved my entire office using their packers & movers service. Professional and efficient.",
+    },
+    {
+      name: "Amit Patel",
+      rating: 5,
+      feedback:
+        "Moved my entire office using their packers & movers service. Professional and efficient.",
+    },
   ];
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -269,258 +297,238 @@ const BookRideSection = () => {
     setServiceProviderData(data); // backend integration ke liye ready data
   };
 
+  const [from, setFrom] = useState("");
+  const [to, setTo] = useState("");
+  const [showSuggestions, setShowSuggestions] = useState({
+    from: false,
+    to: false,
+  });
+  // const router = useRouter();
+
+  const handleSelectFrom = (route) => {
+    setFrom(route);
+    setShowSuggestions((prev) => ({ ...prev, from: false }));
+  };
+
+  const handleSelectTo = (route) => {
+    setTo(route);
+    setShowSuggestions((prev) => ({ ...prev, to: false }));
+  };
+
+  const handleSearch = () => {
+    router.push("/available-services");
+  };
+
+  // for right scrolling in popular route
+  const scrollRef = useRef();
+
+  const handleScrollRight = () => {
+    scrollRef.current?.scrollBy({ left: 300, behavior: "smooth" });
+  };
+
+  // code for FAQs
+  const [activeIndex, setActiveIndex] = useState(null);
+
+  const toggleAccordion = (index) => {
+    setActiveIndex((prevIndex) => (prevIndex === index ? null : index));
+  };
+
   return (
-    <div className="bg-gray-100">
+    <div className="bg-blue-100">
       {/* book your ride section 2nd section */}
-      <section className="py-10 bg-gray-100">
-        <div className="max-w-6xl mx-auto px-6">
-          <motion.h2
-            className="text-3xl font-bold text-center mb-8"
-            initial={{ opacity: 0, y: -30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
+      <section className="md:px-32">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="p-6 px-8 bg-blue-50  rounded-xl shadow-md"
+        >
+          <h2 className="text-4xl font-bold text-center mb-6">
             Book Your Ride
-          </motion.h2>
-
-          <motion.div
-            className="bg-white p-6 rounded-xl shadow-md"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
-          >
-            {/* Pickup and Destination Inputs */}
-            <div className="flex flex-col md:flex-row gap-4 mb-6">
-              <div className="flex items-center border rounded-md px-4 py-2 w-full bg-gray-50">
-                <FaMapMarkerAlt className="text-gray-500 mr-2" />
-                <input
-                  type="text"
-                  placeholder="Enter pickup point"
-                  value={pickup}
-                  onChange={(e) => setPickup(e.target.value)}
-                  className="outline-none bg-transparent w-full"
-                />
-              </div>
-
-              <div className="flex items-center border rounded-md px-4 py-2 w-full bg-gray-50">
-                <FaFlag className="text-gray-500 mr-2" />
-                <input
-                  type="text"
-                  placeholder="Enter destination"
-                  value={destination}
-                  onChange={(e) => setDestination(e.target.value)}
-                  className="outline-none bg-transparent w-full"
-                />
-              </div>
-            </div>
-
-            {/* Services Grid */}
-            <div className="mb-6">
-              <h3 className="text-xl font-semibold mb-4">Select Service</h3>
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                {services.map((service, index) => (
-                  <motion.div
-                    key={index}
-                    whileHover={{ scale: 1.05 }}
-                    className="border rounded-lg p-4 text-center cursor-pointer hover:bg-blue-100 transition-all"
-                  >
-                    <img
-                      src={service.logo} // Assuming 'logo' is a property in your service object
-                      alt={service.name}
-                      className="w-16 h-16 mx-auto mb-2 object-contain"
-                    />
-                    <p className="text-sm font-semibold">{service.name}</p>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-
-            {/* Find Ride Button */}
-            <div className="text-center">
-              <button
-                onClick={handleFindRide}
-                className="bg-blue-700 hover:bg-blue-800 text-white font-semibold px-6 py-3 rounded-full transition-all"
-              >
-                Find Available Ride
-              </button>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-      {/* book your ride section 2nd section farebox */}
-      <section className="py-10 bg-white rounded-lg mx-4 md:mx-20 my-10 shadow">
-        <div className="max-w-3xl mx-auto p-6">
-          <h2 className="text-2xl font-bold text-center mb-6">
-            Fare Calculator
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-            {/* From Dropdown */}
-            <Listbox value={from} onChange={setFrom}>
-              <div className="relative">
-                <Listbox.Button className="w-full p-3 text-left border rounded-lg bg-white">
-                  {from}
-                  <HiSelector
-                    className="absolute right-3 top-3 text-gray-400"
-                    size={20}
-                  />
-                </Listbox.Button>
-                <Listbox.Options className="absolute z-10 w-full mt-1 bg-white border rounded-md shadow-lg max-h-60 overflow-auto">
-                  {locations.map((loc, idx) => (
-                    <Listbox.Option
-                      key={idx}
-                      value={loc}
-                      className={({ active }) =>
-                        `cursor-pointer select-none p-3 ${
-                          active ? "bg-green-100" : ""
-                        }`
-                      }
+          <div className="flex flex-col md:flex-row gap-4 mb-4">
+            {/* From Input */}
+            <div className="relative w-full md:w-1/2">
+              <input
+                className="w-full p-3 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-200 transition"
+                placeholder="Enter pickup point"
+                value={from}
+                onChange={(e) => setFrom(e.target.value)}
+                onFocus={() =>
+                  setShowSuggestions({ ...showSuggestions, from: true })
+                }
+              />
+              {showSuggestions.from && (
+                <ul
+                  className="absolute bg-white border w-full max-h-40 overflow-y-auto z-10 rounded-md shadow"
+                  onMouseDown={(e) => e.preventDefault()}
+                >
+                  {RAIPUR_ROUTES.filter((r) =>
+                    r.toLowerCase().includes(from.toLowerCase())
+                  ).map((route, i) => (
+                    <li
+                      key={i}
+                      className="p-2 hover:bg-blue-100 cursor-pointer transition"
+                      onClick={() => handleSelectFrom(route)}
                     >
-                      {loc}
-                    </Listbox.Option>
+                      {route}
+                    </li>
                   ))}
-                </Listbox.Options>
-              </div>
-            </Listbox>
+                </ul>
+              )}
+            </div>
 
-            {/* To Dropdown */}
-            <Listbox value={to} onChange={setTo}>
-              <div className="relative">
-                <Listbox.Button className="w-full p-3 text-left border rounded-lg bg-white">
-                  {to}
-                  <HiSelector
-                    className="absolute right-3 top-3 text-gray-400"
-                    size={20}
-                  />
-                </Listbox.Button>
-                <Listbox.Options className="absolute z-10 w-full mt-1 bg-white border rounded-md shadow-lg max-h-60 overflow-auto">
-                  {locations.map((loc, idx) => (
-                    <Listbox.Option
-                      key={idx}
-                      value={loc}
-                      className={({ active }) =>
-                        `cursor-pointer select-none p-3 ${
-                          active ? "bg-green-100" : ""
-                        }`
-                      }
+            {/* To Input */}
+            <div className="relative w-full md:w-1/2">
+              <input
+                className="w-full p-3 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-300 transition"
+                placeholder="Enter destination"
+                value={to}
+                onChange={(e) => setTo(e.target.value)}
+                onFocus={() =>
+                  setShowSuggestions({ ...showSuggestions, to: true })
+                }
+              />
+              {showSuggestions.to && (
+                <ul
+                  className="absolute bg-white border w-full max-h-40 overflow-y-auto z-10 rounded-md shadow"
+                  onMouseDown={(e) => e.preventDefault()}
+                >
+                  {RAIPUR_ROUTES.filter((r) =>
+                    r.toLowerCase().includes(to.toLowerCase())
+                  ).map((route, i) => (
+                    <li
+                      key={i}
+                      className="p-2 hover:bg-blue-100 cursor-pointer transition"
+                      onClick={() => handleSelectTo(route)}
                     >
-                      {loc}
-                    </Listbox.Option>
+                      {route}
+                    </li>
                   ))}
-                </Listbox.Options>
-              </div>
-            </Listbox>
+                </ul>
+              )}
+            </div>
+
+            {/* Search Button */}
+            <div className="w-full md:w-auto">
+              <button
+                onClick={handleSearch}
+                disabled={!from || !to}
+                className={`w-full md:w-auto mt-2 md:mt-0 p-3 px-4 rounded-lg shadow flex items-center justify-center transition 
+      ${
+        from && to
+          ? "bg-blue-600 text-white hover:bg-blue-700"
+          : "bg-gray-300 text-gray-500 cursor-not-allowed"
+      }`}
+              >
+                <FaSearch className="mr-2" /> Search
+              </button>
+            </div>
           </div>
 
-          {/* Fare Details */}
-          <div className="bg-white rounded-lg p-6 mb-6">
-            <h3 className="font-semibold text-lg mb-4">Select a Service</h3>
-            {fares.map((fare, index) => (
+          {/* Services */}
+          <h3 className="text-2xl font-bold text-center mb-6"> Services</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-6">
+            {SERVICES.map((service, i) => (
               <motion.div
-                whileHover={{ scale: 1.03 }}
-                key={index}
-                onClick={() => setSelectedFare(fare)}
-                className={`flex items-center justify-between py-3 border-b last:border-0 cursor-pointer rounded-lg px-3
-                ${
-                  selectedFare?.type === fare.type
-                    ? "bg-green-100"
-                    : "hover:bg-green-50"
-                }
-              `}
+                key={i}
+                whileHover={{ scale: 1.05 }}
+                className="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center text-center transition-all duration-300"
               >
-                <div className="flex items-center gap-4">
-                  {fare.icon}
-                  <div>
-                    <p className="font-semibold">{fare.type}</p>
-                    <p className="text-sm text-gray-400">{fare.wait}</p>
-                  </div>
+                <div className="text-4xl text-blue-600 mb-3">
+                  {service.icon}
                 </div>
-                <p className="font-semibold">{fare.price}</p>
+                <h4 className="text-lg font-semibold text-black mb-2">
+                  {service.name}
+                </h4>
+                <p className="text-gray-600 mb-4">{service.description}</p>
+                <button className="bg-blue-600 text-white px-6 py-2 rounded-full text-sm hover:bg-blue-700 transition">
+                  Explore
+                </button>
               </motion.div>
             ))}
           </div>
-
-          {/* Book Button */}
-          <div className="text-center">
-            <button
-              onClick={handleBookRide}
-              disabled={!selectedFare || loading}
-              className="bg-blue-700 hover:bg-blue-800 text-white px-6 py-3 rounded-lg font-semibold transition disabled:opacity-50 disabled:cursor-not-allowed w-full"
-            >
-              {loading ? "Booking..." : "Book Your Ride Now"}
-            </button>
-          </div>
-        </div>
+        </motion.div>
       </section>
-
+      <div className="  mx-1 " >
+      <hr className="my-6 border-t border-gray-500  block md:hidden" />
+      </div>
       {/* 3rd section (popular routes) */}
-      <section className="py-12 bg-gray-100">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex justify-between items-center mb-6">
-            <h2 className="text-2xl font-bold">Popular Routes in Raipur</h2>
+      <section className="md:py-24 py-4">
+        <div className="md:max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="flex justify-between items-center mb-6 flex-wrap gap-2">
+            <h2 className="text-xl sm:text-2xl font-bold">
+              Popular Routes in Raipur
+            </h2>
             <a
               href="#"
-              className="text-green-600 hover:underline text-sm font-semibold"
+              className="text-blue-600 hover:underline text-sm font-semibold"
             >
               View All Routes →
             </a>
           </div>
 
-          {/* Horizontal Scroll Container */}
-          <div className="flex space-x-6 overflow-x-auto scrollbar-hide pb-4">
-            {routes.map((route, index) => (
-              <div
-                key={index}
-                className="min-w-[300px] bg-white p-5 rounded-lg shadow hover:shadow-lg transition duration-300 cursor-pointer"
-              >
-                <h3 className="text-lg font-semibold mb-2">
-                  {route.from} to {route.to}
-                </h3>
-                <p className="text-gray-600 text-sm mb-4">
-                  Bus: {route.bus} | Auto: {route.auto} | Cab: {route.cab}
-                </p>
-                <div className="flex justify-end">
-                  <ArrowRight className="text-green-600" />
+          {/* Cards and Scroll Button Container */}
+          <div className="relative">
+            {/* Horizontal Scroll Container */}
+            <div
+              ref={scrollRef}
+              className="flex space-x-4 sm:space-x-6 overflow-x-auto pb-4 scrollbar-hide scroll-smooth"
+            >
+              {routes.map((route, index) => (
+                <div
+                  key={index}
+                  className="min-w-[250px] sm:min-w-[300px] bg-white p-4 sm:p-5 rounded-lg shadow hover:shadow-lg transition duration-300 cursor-pointer"
+                >
+                  <h3 className="text-md sm:text-lg font-semibold mb-2">
+                    {route.from} to {route.to}
+                  </h3>
+                  <p className="text-gray-600 text-sm mb-4">
+                    Bus: {route.bus} | Auto: {route.auto} | Cab: {route.cab}
+                  </p>
+                  <div className="flex justify-end">
+                    <ArrowRight className="text-blue-600" />
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
+
+            {/* Scroll Right Button */}
+            <button
+              onClick={handleScrollRight}
+              className="absolute -right-3 sm:-right-6 top-1/2 -translate-y-1/2 bg-blue-600 shadow p-2 rounded-full hover:bg-blue-800 transition z-10"
+            >
+              <ArrowRight className="text-white" />
+            </button>
           </div>
         </div>
       </section>
-
+      <div className="  mx-6 " >
+      <hr className="my-6 border-t border-gray-500  block md:hidden" />
+      </div>
       {/* 4th section (real time tracking) */}
-      <section className="py-12 mb-12 bg-gray-100">
-        <div className="w-full mx-auto px-6 flex flex-col md:flex-row items-center gap-32">
-          {/* Left Side - Icon and Dotted Line */}
-          {/* <div className=" md:w-1/2 bg-gray-200  flex justify-center">
-            <div className=" image mt-10 md:mt-0">
-              <Image
-                src="/images/raipurLocation.png"
-                alt="location"
-                width={500}
-                height={500}
-                className="w-full max-w-md"
-              />
-            </div>
-          </div> */}
-          <div className="bg-blue-50 ml-12 p-2 rounded-2xl shadow-lg w-[70vw] h-[56vh]">
-              <iframe
-                src="https://maps.google.com/maps?q=Raipur%20Chhattisgarh&t=&z=13&ie=UTF8&iwloc=&output=embed"
-                width="100%"
-                height="100%"
-                style={{ border: 0, borderRadius: '1rem' }}
-                loading="lazy"
-                allowFullScreen
-                referrerPolicy="no-referrer-when-downgrade"
-              ></iframe>
-            </div>
+      <section className="md:py-12 w-full h-screen  py-2  mb-12">
+        <div className="w-full mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center gap-10 md:gap-32">
+          {/* Left Side - Map Box */}
+          <div className="bg-blue-50 p-2 rounded-2xl shadow-lg w-full md:w-[70vw] h-64 md:h-[56vh]">
+            <iframe
+              src="https://maps.google.com/maps?q=Raipur%20Chhattisgarh&t=&z=13&ie=UTF8&iwloc=&output=embed"
+              width="100%"
+              height="100%"
+              style={{ border: 0, borderRadius: "1rem" }}
+              loading="lazy"
+              allowFullScreen
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
 
           {/* Right Side - Content */}
-          <div className=" pr-32 w-full  md:w-1/2">
-            <h2 className="text-4xl font-bold mb-4 text-center md:text-left">
+          <div className="w-full md:w-1/2 px-2 sm:px-0 md:pr-32 mt-6 md:mt-0">
+            <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-center md:text-left">
               Real-Time Tracking
             </h2>
-            <h3 className="text-xl font-semibold mb-2 text-center md:text-left">
+            <h3 className="text-lg sm:text-xl font-semibold mb-2 text-center md:text-left">
               Track your ride in Real-Time
             </h3>
             <p className="text-gray-600 mb-6 text-center md:text-left">
@@ -530,99 +538,28 @@ const BookRideSection = () => {
             </p>
 
             {/* Vehicle Info Box */}
-            <div className="bg-white p-6 rounded-lg text-center shadow-md">
-              <p className="text-lg font-semibold mb-2">Vehicle Name</p>
-              <p className="text-gray-700">Showing its current location</p>
+            <div className="bg-white p-4 sm:p-6 rounded-lg text-center shadow-md">
+              <p className="text-md sm:text-lg font-semibold mb-2">
+                Vehicle Name
+              </p>
+              <p className="text-gray-700 text-sm sm:text-base">
+                Showing its current location
+              </p>
             </div>
           </div>
         </div>
       </section>
-
-      {/* 5th section  (fast & easy ride) */}
-      <section className="h-[90vh] flex flex-col bg-blue-600  md:flex-row items-center justify-around px-6 md:px-16  overflow-hidden">
-        {/* Left Content */}
-        <motion.div
-          initial={{ x: -100, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.8 }}
-          className="flex flex-col items-center md:items-start text-center md:text-left gap-6 max-w-xl"
-        >
-          <h1 className="text-3xl md:text-5xl font-bold text-white leading-tight">
-            Fast, Easy and <br /> Safe Rides
-          </h1>
-          <p className="text-white text-lg md:text-xl">
-            Lightning-fast and user-friendly app to book your rides. Get picked
-            up right at your doorstep by trusted drivers for a safe and smooth
-            journey.
-          </p>
-
-          <div className="flex gap-4 flex-wrap justify-center md:justify-start">
-            <button className="bg-[#1400AE] text-white px-6 py-3 rounded-md font-semibold hover:bg-[#100092] transition-colors duration-300">
-              Download App
-            </button>
-          </div>
-        </motion.div>
-
-        {/* Right Side Image */}
-        <motion.div
-           initial={{ x: -100, opacity: 0 }}
-           whileInView={{ x: 0, opacity: 1 }}
-           transition={{ duration: 0.8 }}
-          className="mt-10 md:mt-0"
-        >
-          <Image
-            src="/images/easyRide.svg"
-            alt="Auto Ride"
-            width={500}
-            height={300}
-            className="w-full max-w-md"
-          />
-        </motion.div>
-      </section>
-
-      {/* 6th section (Service)  */}
-      <section className="py-16 bg-gray-50">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold">Discover Services</h2>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto px-6">
-          {services2.map((service, idx) => (
-            <motion.div
-              key={idx}
-              whileHover={{ scale: 1.05 }}
-              className="bg-white rounded-xl shadow-md hover:shadow-lg p-6 flex flex-col justify-between"
-            >
-              <div>
-                <div className="flex items-center justify-center mb-4 text-blue-600">
-                  {service.icon}
-                </div>
-                <h3 className="text-xl font-semibold mb-2 text-center">
-                  {service.title}
-                </h3>
-                <p className="text-gray-500 text-center mb-6">{service.desc}</p>
-              </div>
-              <div className="flex justify-center">
-                <button
-                  onClick={() => router.push(service.link)}
-                  className="bg-blue-500 hover:bg-blue-600 text-white px-5 py-2 rounded-full transition"
-                >
-                  Explore
-                </button>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
+      <div className="  mx-6 mb-2 mt-[-2] " >
+      <hr className=" border-t border-gray-500  block md:hidden" />
+      </div>
       {/* 7th section (featurs) */}
-      <section className="py-12 px-4 bg-gray-50">
-        <div className="max-w-7xl mx-auto text-center">
+      <section className="pb-16 md:pb-28 px-4 ">
+        <div className="md:max-w-7xl mx-auto text-center">
           <h2 className="text-3xl font-bold mb-10 text-gray-800">
             Why Choose CG Yatri?
           </h2>
 
-          <div className="grid gap-8 md:grid-cols-3">
+          <div className="grid gap-5 md:gap-8  md:grid-cols-3">
             {features.map((feature, index) => (
               <motion.div
                 key={index}
@@ -646,18 +583,18 @@ const BookRideSection = () => {
           </div>
         </div>
       </section>
-
+      
       {/* 8th section (user review) */}
-      <section className="py-32 bg-blue-600 text-white">
+      <section className="py-12 md:py-28 bg-blue-600 text-white">
         <div className="text-center mb-10">
           <h2 className="text-3xl font-bold">What Our Users Say</h2>
         </div>
 
-        <div className="max-w-6xl mx-auto grid gap-8 px-4 md:grid-cols-3">
+        <div className="md:max-w-6xl mx-auto grid gap-5 md:gap-8 px-4 md:grid-cols-3">
           {review.map((testimonial, index) => (
             <motion.div
               key={index}
-              className="bg-blue-700 p-6 rounded-lg shadow-md"
+              className="bg-blue-700 p-4 md:p-6 rounded-lg shadow-md"
               whileHover={{ scale: 1.05 }}
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -721,9 +658,11 @@ const BookRideSection = () => {
           ))}
         </div>
       </section>
-
+      <div className="  mx-6 " >
+      <hr className="my-6 border-t border-gray-500  block md:hidden" />
+      </div>
       {/* 9th section (About section) */}
-      <section className="py-16 px-4 my-32 bg-white flex flex-col md:flex-row gap-8 max-w-7xl mx-auto items-start">
+      <section className="pt-4 md:pt-8 px-4 md:mt-32 mt-8   flex flex-col md:flex-row gap-6 md:gap-8 md:max-w-7xl mx-auto items-start">
         {/* Left Content */}
         <motion.div
           className="flex-1"
@@ -731,14 +670,14 @@ const BookRideSection = () => {
           whileInView={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-3xl font-bold mb-4">About CG Yatri</h2>
-          <p className="mb-6 text-gray-700">
+          <h2 className="text-3xl font-bold md:mb-4 mb-3 ">About CG Yatri</h2>
+          <p className="md:mb-6 mb-3 text-gray-700">
             CG Yatri is Chhattisgarh's premier urban mobility platform,
             integrating all forms of city transportation into one seamless
             experience. Our mission is to make urban travel efficient,
             affordable, and sustainable.
           </p>
-          <p className="mb-8 text-gray-700">
+          <p className="md:mb-8 mb-6 text-gray-700">
             From daily commuters to businesses needing logistics support, we
             serve all transportation needs across Raipur, Bilaspur, Bhilai, and
             other major cities in Chhattisgarh.
@@ -751,11 +690,8 @@ const BookRideSection = () => {
               Learn More
             </button>
             <button
-              onClick={() => {
-                const contactSection = document.getElementById("contact");
-                contactSection?.scrollIntoView({ behavior: "smooth" });
-              }}
-              className="border border-blue-600 text-teal-600 px-6 py-2 rounded-full hover:bg-blue-600 hover:text-white transition"
+              onClick={() => router2.push("/Contact")}
+              className="border border-blue-600 text-teal-900 px-6 py-2 rounded-full hover:bg-blue-600 hover:text-white transition"
             >
               Contact Us
             </button>
@@ -788,6 +724,52 @@ const BookRideSection = () => {
           onClose={() => setIsModalOpen(false)}
           onSave={handleSave}
         />
+      </section>
+      
+      {/* FAQs  */};
+      <section className="md:my-16 my-6 px-4 sm:px-6">
+        <div className="md:max-w-7xl mx-auto py-10">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold mb-8 text-center leading-snug">
+            Frequently Asked Questions
+          </h2>
+          <div className="space-y-3">
+            {faqData.map((faq, index) => (
+              <div
+                key={index}
+                className="border border-gray-300 bg-white rounded-lg p-4 sm:p-5 cursor-pointer shadow-sm hover:shadow-md transition duration-300"
+                onClick={() => toggleAccordion(index)}
+              >
+                <div className="flex justify-between items-center gap-3">
+                  <h3 className="text-base sm:text-lg md:text-xl font-semibold flex-1">
+                    {faq.question}
+                  </h3>
+                  <span
+                    className={`text-xl sm:text-2xl transform transition-transform duration-300 ${
+                      activeIndex === index ? "rotate-180" : ""
+                    }`}
+                  >
+                    ▼
+                  </span>
+                </div>
+
+                <AnimatePresence initial={false}>
+                  {activeIndex === index && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <p className="text-sm sm:text-base text-gray-700 mt-2 px-1 sm:px-2">
+                        {faq.answer}
+                      </p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            ))}
+          </div>
+        </div>
       </section>
     </div>
   );
