@@ -84,7 +84,7 @@ const JoinCommunity = () => {
 
   return (
     <>
-    <section className="py-16 px-6 mt-10 bg-blue-50 text-center">
+    <section className="py-16 px-6 mt-10 bg-blue-100 text-center">
       {/* 1st section */}
       <section>
         <motion.div
@@ -128,7 +128,7 @@ const JoinCommunity = () => {
       </section>
 
       {/* 2nd section  */}
-      <section className="bg-blue-50 py-16 px-6">
+      <section className="bg-blue-50 mt-10 rounded-xl py-16 px-6">
         {/* Top Blue Box */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}

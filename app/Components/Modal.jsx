@@ -24,7 +24,7 @@ const Modal = () => {
         <UserDetail />
       ) : <div>n</div>
       }
-    </div>
+    </div> 
   );
 };
 

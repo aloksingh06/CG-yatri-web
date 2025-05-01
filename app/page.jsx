@@ -38,7 +38,7 @@ const Home = () => {
   }, []);
   return (
    
-    <div className="bg-gray-100  ">
+    <div className=" bg-blue-100 w-full">
       <Landingpage />
       <Homepage2 />
       {/* <OurServices /> */}
