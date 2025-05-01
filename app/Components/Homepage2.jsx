@@ -119,51 +119,8 @@ const faqData = [
 ];
 
 const BookRideSection = () => {
-  // const [pickup, setPickup] = useState("");
-  // const [destination, setDestination] = useState("");
-
-  // const services = [
-  //   {
-  //     name: "City Bus",
-  //     logo: "/images/busLogo.jpg",
-  //   },
-  //   {
-  //     name: "Auto Rickshaw",
-  //     logo: "/path/to/auto-rickshaw-logo.png",
-  //   },
-  //   {
-  //     name: "Cab",
-  //     logo: "/path/to/cab-logo.png",
-  //   },
-  //   {
-  //     name: "Bike",
-  //     logo: "/path/to/bike-logo.png",
-  //   },
-  //   {
-  //     name: "Freight Mover",
-  //     logo: "/path/to/freight-mover-logo.png", // Replace with actual logo URL
-  //   },
-  //   {
-  //     name: "Packers & Movers",
-  //     logo: "/path/to/packers-movers-logo.png", // Replace with actual logo URL
-  //   },
-  //   {
-  //     name: "EV Charging",
-  //     logo: "/path/to/ev-charging-logo.png", // Replace with actual logo URL
-  //   },
-  //   {
-  //     name: "Parking",
-  //     logo: "/path/to/parking-logo.png", // Replace with actual logo URL
-  //   },
-  // ];
-
-  // const handleFindRide = () => {
-  //   if (pickup && destination) {
-  //     alert(`Finding rides from ${pickup} to ${destination}`);
-  //   } else {
-  //     alert("Please enter both Pickup and Destination!");
-  //   }
-  // };
+ 
+  
 
   const routes = [
     {
@@ -211,17 +168,7 @@ const BookRideSection = () => {
     },
   ];
 
-  // const locations = [
-  //   "Railway Station",
-  //   "Airport",
-  //   "Pandri",
-  //   "Telibandha",
-  //   "Shankar Nagar",
-  //   "Amanaka",
-  //   "Gudiyari",
-  //   "Sadar Bazar",
-  // ];
-
+ 
   const services2 = [
     {
       title: "Auto Services",
@@ -280,42 +227,7 @@ const BookRideSection = () => {
   ];
   const router = useRouter();
 
-  // const fares = [
-  //   {
-  //     type: "City Bus",
-  //     icon: <FaBus className="text-green-500" size={24} />,
-  //     price: "₹15-25",
-  //     wait: "15-10 min wait",
-  //   },
-  //   {
-  //     type: "Auto Rickshaw",
-  //     icon: <FaMotorcycle className="text-yellow-400" size={24} />,
-  //     price: "₹80-120",
-  //     wait: "5-10 min wait",
-  //   },
-  //   {
-  //     type: "Premium Cab",
-  //     icon: <FaTaxi className="text-blue-400" size={24} />,
-  //     price: "₹180-300",
-  //     wait: "5-15 min wait",
-  //   },
-  // ];
-
-  // const [from, setFrom] = useState(locations[0]);
-  // const [to, setTo] = useState(locations[1]);
-  // const [selectedFare, setSelectedFare] = useState(null);
-  // const [loading, setLoading] = useState(false);
-
-  // const handleBookRide = () => {
-  //   if (!selectedFare) return;
-  //   setLoading(true);
-  //   setTimeout(() => {
-  //     setLoading(false);
-  //     alert(`Booking from ${from} to ${to} by ${selectedFare.type} confirmed!`);
-  //     setSelectedFare(null); // Reset after booking
-  //   }, 1500);
-  // };
-
+ 
   const features = [
     {
       title: "Affordable Pricing",
@@ -596,7 +508,7 @@ const BookRideSection = () => {
       <hr className="my-6 border-t border-gray-500  block md:hidden" />
       </div>
       {/* 4th section (real time tracking) */}
-      <section className="md:py-12 py-2 md:hidden mb-12">
+      <section className="md:py-12 w-full h-screen  py-2  mb-12">
         <div className="w-full mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center gap-10 md:gap-32">
           {/* Left Side - Map Box */}
           <div className="bg-blue-50 p-2 rounded-2xl shadow-lg w-full md:w-[70vw] h-64 md:h-[56vh]">
