@@ -1,95 +1,234 @@
-"use client"
-import React, { useState } from 'react'
+"use client";
 
-const faqData = [
-  {
-    question: 'What is your return policy?',
-    answer: 'Our return policy lasts 30 days from the date of purchase.'
-  },
-  {
-    question: 'How long does shipping take?',
-    answer: 'Shipping usually takes 5-7 business days depending on your location.'
-  },
-  {
-    question: 'Do you offer customer support?',
-    answer: 'Yes, we offer 24/7 customer support via email and chat.'
-  }
-];
-const Plan = () => {
-  
-  const [activeIndex, setActiveIndex] = useState(null);
+import React, { useState, useRef, useEffect } from "react";
+import { User, Wrench } from "lucide-react"; // Icons for Driver and Service Provider
 
-  const toggleAccordion = (index) => {
-    setActiveIndex(prevIndex => (prevIndex === index ? null : index));
+const faqData = {
+  drivers: [
+    {
+      question: "What is the biggest benefit of joining CG Yatri",
+      answer:
+        "With CG Yatri, you earn 100% of the fare and can also earn extra through advertisements placed on your vehicle - more rides + extra income = better earnings for you and your family. No middlemen or commission, Daily earnings go directly to your account, Transparent fares fixed by the government, Support from Government & Driver's Union",
+    },
+    {
+      question: "Is there any commission charged by CG Yatri?",
+      answer:
+        "No commission at all. Drivers pay a small daily service fee only on the days they are active on the app.",
+    },
+    {
+      question: "How can I join CG Yatri as a driver?",
+      answer:
+        "You can sign up easily through the CG Yatri Driver App or visit our help center/kiosk (Drivers union made and managed). Upload your documents and start taking rides once verified.",
+    },
+    {
+      question: "What is the daily service fee model?",
+      answer:
+        "You only pay a low daily fee (capped at a fixed amount) on the days you use the platform - earn as much as you want with no extra cuts.",
+    },
+    {
+      question: "Do I need a smartphone to use CG Yatri?",
+      answer:
+        "Yes, having a smartphone helps you receive bookings and use the driver app. We'll also help you if you face any issues with using the app.",
+    },
+    {
+      question: "Can I work with CG Yatri and other platforms too?",
+      answer:
+        "Yes! CG Yatri is an open platform - you're free to take rides from other apps as well. Your vehicle, your choice",
+    },
+  ],
+  providers: [
+    {
+      question: "I run a rental/packer/mover service - how do I list my business?",
+      answer:
+        "You can list your service easily on CG Yatri by signing up through our app or website. Fill in your business details and our team will reach out to you.",
+    },
+    {
+      question: "What are the charges for listing services on CG Yatri?",
+      answer:
+        "There's no commission. Just a small daily or per-booking service fee - only when you get a booking. No hidden costs, full control over your earnings.",
+    },
+    {
+      question: "How do I manage bookings through the platform?",
+      answer:
+        "You'll get a simple dashboard where you can: View and accept bookings, Set availability and service areas, Communicate with customers, Track payments and performance.",
+    },
+    {
+      question: "How can I become a service provider for CG Yatri?",
+      answer:
+        "To become a service provider, sign up on the CG Yatri platform as a partner. Provide your business details, including services offered, pricing, and contact information. After verification, your services will be listed on the app.",
+    },
+    {
+      question: "What types of services can I offer as a provider?",
+      answer:
+        "As a provider, you can offer services like vehicle maintenance, cleaning, repairs, roadside assistance, fuel stations, and insurance.",
+    },
+    {
+      question: "How do I manage my service listings?",
+      answer:
+        "You can manage your service listings through the provider portal on CG Yatri. Update your services, pricing, and availability there.",
+    },
+    {
+      question: "What are the benefits of being a CG Yatri provider?",
+      answer:
+        "You gain access to a large customer base, increased visibility, seamless booking and payment integration, and analytics to track service performance.",
+    },
+    {
+      question: "What payment methods are available for service providers?",
+      answer:
+        "Payments to service providers are made via bank transfers and digital wallets. Providers can check transaction history in the provider portal.",
+    },
+  ],
+};
+
+const FAQPage = () => {
+  const [activeTab, setActiveTab] = useState("drivers");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [openIndex, setOpenIndex] = useState(null);
+  const faqSectionRef = useRef(null);
+
+  const toggleFAQ = (index) => {
+    setOpenIndex(openIndex === index ? null : index);
   };
 
+  const filterFAQs = (faqList) =>
+    faqList.filter((faq) =>
+      faq.question.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+  useEffect(() => {
+    // Scroll to FAQ section on tab change
+    if (faqSectionRef.current) {
+      faqSectionRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [activeTab]);
+
   return (
-    <div>
-      <div className="bg-[#9cd6ff] rounded-3xl p-10 sm:p-10 md:p-28 flex flex-col md:flex-row items-center md:items-start justify-between ">
-        
-        {/* Left Side Content */}
-        <div className="md:w-1/2 w-full space-y-6 text-center md:text-left">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-black leading-tight">
-          CG Yatri Driver & Rider Plan
+    <div className="container mx-auto p-4 sm:p-6 lg:p-12 min-h-screen">
+      {/* Hero Section */}
+      <div className="bg-[#9cd6ff] rounded-3xl p-6 mt-16 sm:p-10 lg:p-16 flex flex-col md:flex-row items-center justify-between shadow-lg">
+        <div className="md:w-1/2 space-y-4 text-center md:text-left">
+          <h1 className="text-3xl sm:text-4xl font-bold text-black">
+            CG Yatri Driver & Rider Plan
           </h1>
-          <p className="text-base sm:text-lg text-gray-800">
-          To ensure CG Yatri remains a reliable, zero-commission mobility platform, we’ve introduced affordable plans for both drivers and riders. These small, transparent contributions help us maintain smooth operations, improve features, and deliver a better travel experience — all while keeping 100% direct payments between riders and drivers.
-          Whether you’re driving or riding, you’re helping build a smarter, independent transport network in Chhattisgarh.
+          <p className="text-gray-800 text-base">
+            To ensure CG Yatri remains a reliable, zero-commission mobility
+            platform, we’ve introduced affordable plans for both drivers and
+            riders.
           </p>
-
-          
-          
-
-        <div>
-          <h1>✅Zero Commission</h1>
-          <h1>✅pay only if you take ride</h1>
-          
+          <div className="space-y-1">
+            <p className="text-green-600 font-medium">✅ Zero Commission</p>
+            <p className="text-green-600 font-medium">
+              ✅ Pay only if you take a ride
+            </p>
+          </div>
         </div>
-          
-        </div>
-
-        {/* Right Side Image Box */}
-        <div className="md:w-1/2 w-full flex justify-center">
-          <div className="bg-white w-[100%] sm:w-[20vw] h-[30vw] sm:h-[20vw] rounded-3xl shadow-md flex items-center justify-center">
-            {/* Replace this with actual image if needed */}
-            <span className="text-gray-400">Image here</span>
-            {/* Example:
-            <Image src="/bus-map.png" alt="Map" width={300} height={300} className="rounded-3xl object-cover" />
-            */}
+        <div className="md:w-1/2 flex justify-center mt-6 md:mt-0">
+          <div className="bg-white w-[90%] sm:w-[80%] h-[220px] sm:h-[280px] md:h-[320px] rounded-3xl shadow-md overflow-hidden flex items-center justify-center">
+            <img
+              src="/images/plan_hero_section.jpg"
+              alt="Plan Hero Section"
+              className="w-full h-full object-cover rounded-2xl transition-transform duration-500 hover:scale-105"
+            />
           </div>
         </div>
       </div>
-      <div>
-      <div className="max-w-5xl mx-auto py-10 px-4">
-      <h2 className="text-3xl font-bold mb-8 text-center">Frequently Asked Questions</h2>
-      <div className="space-y-4">
-        {faqData.map((faq, index) => (
-          <div
-            key={index}
-            className="border border-gray-300 rounded-lg p-4 cursor-pointer shadow-sm transition duration-300"
-            onClick={() => toggleAccordion(index)}
-          >
-            <div className="flex justify-between items-center">
-              <h3 className="text-xl font-semibold">{faq.question}</h3>
-              <span
-                className={`text-2xl transform transition-transform duration-300 ${
-                  activeIndex === index ? 'rotate-180' : ''
-                }`}
+
+      {/* FAQ Section */}
+      <div ref={faqSectionRef}>
+        <div className="text-center my-12">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-800">
+            Frequently Asked Questions
+          </h2>
+          <p className="text-md mt-2 text-gray-500">
+            Find answers to the most common queries.
+          </p>
+        </div>
+
+        {/* Tabs */}
+        <div className="flex justify-center flex-wrap gap-4 mb-6">
+          {[
+            { key: "drivers", label: "Drivers", icon: <User className="w-5 h-5 mr-2" /> },
+            {
+              key: "providers",
+              label: "Service Providers",
+              icon: <Wrench className="w-5 h-5 mr-2" />,
+            },
+          ].map((tab) => (
+            <button
+              key={tab.key}
+              onClick={() => {
+                setActiveTab(tab.key);
+                setOpenIndex(null);
+              }}
+              className={`flex items-center px-4 py-2 rounded-lg font-medium transition ${
+                activeTab === tab.key
+                  ? "bg-blue-600 text-white"
+                  : "bg-gray-200 hover:bg-gray-300"
+              }`}
+            >
+              {tab.icon}
+              {tab.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Search */}
+        <div className="flex justify-center mb-8">
+          <input
+            type="text"
+            placeholder="Search FAQs..."
+            value={searchTerm}
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+              setOpenIndex(null);
+            }}
+            className="p-2 sm:p-3 w-[90%] sm:w-2/3 md:w-1/2 border rounded-xl border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+
+        {/* FAQ List */}
+        <div className="space-y-6 max-w-6xl mx-auto">
+          {filterFAQs(faqData[activeTab]).length === 0 ? (
+            <p className="text-center text-gray-500">No results found.</p>
+          ) : (
+            filterFAQs(faqData[activeTab]).map((faq, index) => (
+              <div
+                key={index}
+                className="bg-white border rounded-xl overflow-hidden shadow hover:shadow-lg transition"
               >
-                ▼
-              </span>
-            </div>
-            {activeIndex === index && (
-              <p className="text-gray-700 mt-2">{faq.answer}</p>
-            )}
-          </div>
-        ))}
+                <div
+                  onClick={() => toggleFAQ(index)}
+                  className="cursor-pointer p-4 flex justify-between items-center hover:bg-blue-50"
+                >
+                  <h4
+                    className={`text-base sm:text-lg font-medium ${
+                      openIndex === index ? "text-blue-600" : "text-gray-800"
+                    }`}
+                  >
+                    {faq.question}
+                  </h4>
+                  <span
+                    className={`text-xl transition-transform duration-300 ${
+                      openIndex === index
+                        ? "rotate-180 text-blue-600"
+                        : "text-gray-500"
+                    }`}
+                  >
+                    &#9660;
+                  </span>
+                </div>
+                {openIndex === index && (
+                  <div className="bg-blue-50 p-4 text-sm sm:text-base text-gray-700">
+                    {faq.answer}
+                  </div>
+                )}
+              </div>
+            ))
+          )}
+        </div>
       </div>
     </div>
+  );
+};
 
-      </div>
-    </div>
-  )
-}
-
-export default Plan
+export default FAQPage;
