@@ -14,6 +14,7 @@ import Login from './Login/page'
 import api from '@/utils/api'
 
 
+
 const Home = () => {
   const { setIsAuthenticated, setUser, isAuthenticated } = useContext(AuthContext);
 
@@ -47,6 +48,7 @@ const Home = () => {
       {/* <JoinSection /> */}
       {/* <AboutSection /> */}
       <FooterSection />
+     
       
     
     </div>

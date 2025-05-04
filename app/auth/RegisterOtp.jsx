@@ -8,6 +8,7 @@ import api from "@/utils/api";
 import { motion } from "framer-motion";
 
 import logo from "@/app/images/logo-png.png"
+import Image from "next/image";
 // this page for otp verification for register form
 const RegisterOtp = () => {
   const { setIsAuthenticated, setUser, name, number, role, setpopUpPage, user } = useContext(AuthContext);
@@ -63,19 +64,19 @@ const RegisterOtp = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 px-4">
+    <div className="flex items-center justify-center min-h-screen bg-zinc-900/50 backdrop-blur-sm px-4">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="bg-white p-8 rounded-xl shadow-md w-full max-w-md"
+        className="relative z-10 bg-white/80 backdrop-blur-md shadow-2xl rounded-2xl px-8 py-3 w-full max-w-sm space-y-6 flex flex-col items-center overflow-hidden"
       >
          <div className="absolute top-0 left-0 w-full">
-                  <svg viewBox="0 0 500 150" preserveAspectRatio="none" className="w-full h-40">
-                    <path d="M-0.84,77.75 C150.00,150.00 349.88,0.00 500.00,100.00 L500.00,0.00 L0.00,0.00 Z" 
-                      style={{ stroke: "none", fill: "#3b82f6", opacity: 0.4 }} />
-                  </svg>
-                </div>
+          <svg viewBox="0 0 500 150" preserveAspectRatio="none" className="w-full h-40">
+            <path d="M-0.84,77.75 C150.00,150.00 349.88,0.00 500.00,100.00 L500.00,0.00 L0.00,0.00 Z"
+              style={{ stroke: "none", fill: "rgb(0, 100, 241)", opacity: 0.4 }} />
+          </svg>
+        </div>
         
                 {/* Close Button */}
                
@@ -84,9 +85,9 @@ const RegisterOtp = () => {
                 <Image
                   src={logo}
                   alt="Logo"
-                  width={100}
-                  height={100}
-                  className="mb-4 relative z-10"
+                  width={65}
+                  height={65}
+                  className="mb-10 relative z-10"
                 />
         <h1 className="text-2xl font-bold mb-2 text-center text-gray-800">OTP Verification</h1>
         <p className="text-sm text-gray-600 text-center mb-4">
@@ -103,7 +104,7 @@ const RegisterOtp = () => {
                 value={digit}
                 onChange={(e) => handleChange(e.target.value, index)}
                 onKeyDown={(e) => handleKeyDown(e, index)}
-                className="w-12 h-12 text-center border border-gray-300 rounded-md text-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-12 h-12 bg-white text-center border border-gray-300 rounded-md text-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
             ))}
           </div>
@@ -111,7 +112,7 @@ const RegisterOtp = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             type="submit"
-            className="w-full bg-gradient-to-r from-indigo-500 to-pink-500 text-white py-2 rounded-full hover:opacity-90 transition"
+            className="w-full mb-5 bg-gradient-to-r from-indigo-500 to-pink-500 text-white py-2 rounded-full hover:opacity-90 transition"
           >
             Verify OTP
           </motion.button>

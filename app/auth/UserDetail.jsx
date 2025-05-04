@@ -44,12 +44,33 @@ const UserDetail = () => {
 
     return (
         <div className="flex justify-center items-center min-h-screen bg-zinc-900/50 backdrop-blur-sm">
+             <div className="absolute top-0 left-0 w-full">
+                      <svg viewBox="0 0 500 150" preserveAspectRatio="none" className="w-full h-40">
+                        <path d="M-0.84,77.75 C150.00,150.00 349.88,0.00 500.00,100.00 L500.00,0.00 L0.00,0.00 Z"
+                          style={{ stroke: "none", fill: "rgb(0, 100, 241)", opacity: 0.4 }} />
+                      </svg>
+                    </div>
+                    
+                            {/* Close Button */}
+                           
+                    
+                            {/* Logo */}
+                            <Image
+                              src={logo}
+                              alt="Logo"
+                              width={65}
+                              height={65}
+                              className="mb-10 relative z-10"
+                            />
             <form onSubmit={handleSubmit((data) => {
                 data.name = name;
                 data.number = number;
                 data.role = role;
                 handleRegister(data);
             })} className="bg-white shadow-xl rounded-lg p-8 w-full max-w-md space-y-6">
+
+
+
                 <h2 className="text-2xl font-bold text-center">Register as {role}</h2>
 
                 {/* Dynamic form fields based on role */}

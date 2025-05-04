@@ -10,7 +10,9 @@ const LandingPage = () => {
   const router = useRouter();
 
   return (
+
     <section className="md:min-h-screen h-content  mt-22 md:mt-0 flex flex-col md:flex-row items-center bg-blue-100 justify-around px-4 sm:px-6 md:px-16 py-8 md:py-0 overflow-hidden">
+
       {/* Left Content */}
       <motion.div
         initial={{ x: -100, opacity: 0 }}

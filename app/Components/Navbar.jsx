@@ -8,8 +8,8 @@ import { Menu, X, User } from "lucide-react";
 import { AuthContext } from "@/app/Context/AuthContext";
 import { usePathname } from "next/navigation";
 import OurServices from "./OurServices";
-import Login from "./Login";
-import Register from "./Register";
+import Login from "../auth/Login";
+import Register from "../auth/Register";
 import Modal from "./Modal";
 import { useRouter } from "next/navigation";
 
