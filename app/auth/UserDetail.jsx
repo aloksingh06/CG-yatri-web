@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import api from "@/utils/api";
 import { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext";
+import logo from "@/app/images/logo-png.png";
 
 const UserDetail = () => {
 
