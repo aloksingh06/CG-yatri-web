@@ -429,26 +429,39 @@ const BookRideSection = () => {
 
           {/* Services */}
           <h3 className="text-2xl font-bold text-center mb-6"> Services</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-6">
-            {SERVICES.map((service, i) => (
-              <motion.div
-                key={i}
-                whileHover={{ scale: 1.05 }}
-                className="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center text-center transition-all duration-300"
-              >
-                <div className="text-4xl text-blue-600 mb-3">
-                  {service.icon}
-                </div>
-                <h4 className="text-lg font-semibold text-black mb-2">
-                  {service.name}
-                </h4>
-                <p className="text-gray-600 mb-4">{service.description}</p>
-                <button className="bg-blue-600 text-white px-6 py-2 rounded-full text-sm hover:bg-blue-700 transition">
-                  Explore
-                </button>
-              </motion.div>
-            ))}
-          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-6">
+  {SERVICES.map((service, i) => {
+    const isLastOddItem =
+      SERVICES.length % 2 === 1 && i === SERVICES.length - 1;
+
+    return (
+      <motion.div
+        key={i}
+        whileHover={{ scale: 1.05 }}
+        className={` bg-white rounded-2xl shadow-lg p-4 flex flex-col items-center text-center transition-all duration-300
+          ${isLastOddItem ? "w-full col-span-2 justify-self-center sm:col-span-1 " : ""}
+        `}
+      >
+        <div className="text-3xl sm:text-4xl text-blue-600 mb-2">
+          {service.icon}
+        </div>
+        <h4 className="text-sm sm:text-lg font-semibold text-black mb-2">
+          {service.name}
+        </h4>
+
+        <p className="hidden sm:block text-gray-600 mb-3 text-sm">
+          {service.description}
+        </p>
+
+        <button className="bg-blue-600 mb-2 text-white px-4 py-1 sm:px-6 sm:py-2 rounded-full text-xs sm:text-sm hover:bg-blue-700 transition">
+          Explore
+        </button>
+      </motion.div>
+    );
+  })}
+</div>
+
+
         </motion.div>
       </section>
       <div className="  mx-1 " >
@@ -508,7 +521,7 @@ const BookRideSection = () => {
       <hr className="my-6 border-t border-gray-500  block md:hidden" />
       </div>
       {/* 4th section (real time tracking) */}
-      <section className="md:py-12 w-full h-screen  py-2  mb-12">
+      <section className="md:py-12 w-full  py-2  mb-1">
         <div className="w-full mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center gap-10 md:gap-32">
           {/* Left Side - Map Box */}
           <div className="bg-blue-50 p-2 rounded-2xl shadow-lg w-full md:w-[70vw] h-64 md:h-[56vh]">
@@ -562,23 +575,26 @@ const BookRideSection = () => {
           <div className="grid gap-5 md:gap-8  md:grid-cols-3">
             {features.map((feature, index) => (
               <motion.div
-                key={index}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.3 }}
-                transition={{ duration: 0.9, delay: index * 0.1 }}
-                className="bg-white rounded-2xl shadow-md p-9 flex flex-col items-center hover:shadow-xl transition"
-              >
-                <div className="text-5xl mb-4">{feature.icon}</div>
-                <h3 className="text-xl font-semibold mb-2 text-gray-700">
-                  {feature.title}
-                </h3>
-                <p className="text-gray-500 w-[70%] text-sm">
-                  {feature.description}
-                </p>
-              </motion.div>
+              key={index}
+              whileHover={{ scale: 1.05, boxShadow: "0 10px 20px rgba(0, 0, 0, 0.15)" }}
+              whileTap={{ scale: 0.95 }}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.3 }}
+              transition={{
+                duration: 0.5,
+                delay: index * 0.1,
+                ease: "easeOut",
+              }}
+              className="bg-white rounded-2xl shadow-md p-9 flex flex-col items-center"
+            >
+              <div className="text-5xl mb-4">{feature.icon}</div>
+              <h3 className="text-xl font-semibold mb-2 text-gray-700">
+                {feature.title}
+              </h3>
+              <p className="text-gray-500 w-[70%] text-sm">{feature.description}</p>
+            </motion.div>
+            
             ))}
           </div>
         </div>
@@ -701,7 +717,7 @@ const BookRideSection = () => {
         {/* Right Card */}
         <motion.div
           className="flex-1 bg-gray-100 p-8 rounded-lg shadow-lg"
-          initial={{ x: 50, opacity: 0 }}
+          initial={{ x: 0, opacity: 0 }}
           whileInView={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.5 }}
         >

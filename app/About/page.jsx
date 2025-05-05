@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { Download, Info, Smartphone, Network, Expand } from "lucide-react";
-import FooterSection from '../Components/FooterSection'
+import FooterSection from "../Components/FooterSection";
 
 const HeroSection = () => {
   const features = [
@@ -31,74 +31,96 @@ const HeroSection = () => {
   return (
     <div className=" w-full min-h-screen mt-12 bg-gray-100">
       {/* 1st section  */}
-      <section className="py-32  px-6 md:px-20 w-full h-content   text-blue-900">
+      <section className="bg-white text-gray-800">
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: -30 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12"
+          className="bg-gradient-to-b from-blue-600 to-blue-400 text-white py-10 text-center h-98 flex flex-col justify-center items-center"
         >
-          {/* Left Content */}
-          <div className="flex-1">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
-              Seamless Travel Across{" "}
-              <span className="text-blue-600">Chhattisgarh</span>
-            </h1>
-            <p className="text-lg text-blue-700 mb-8">
-              Our mobile app makes travel across Chhattisgarh more accessible
-              and efficient, starting in Raipur and expanding statewide.
+          <h1 className="text-4xl font-bold mb-4">About CG Yatri</h1>
+          <p className="text-lg max-w-3xl mx-auto">
+            Revolutionizing mobility in Chhattisgarh with seamless
+            transportation solutions for riders, drivers, and service providers.
+          </p>
+        </motion.div>
+
+        <div className="max-w-7xl mx-auto px-4 py-16 grid md:grid-cols-2 gap-10 items-center">
+          {/* Text Section */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+          >
+            <h2 className="text-3xl font-bold mb-4 text-gray-900">Our Story</h2>
+            <p className="mb-4">
+              CG Yatri is a driver-centric and customer-friendly mobility
+              platform, developed in collaboration with the Chhattisgarh
+              Government. Our vision is to contribute meaningfully to the
+              state’s Integrated and Open Mobility movement by creating a
+              transparent, inclusive, and technology-driven transportation
+              network.  
+            </p>
+            <p className="mb-6">
+              We aim to build an open ecosystem where innovators in the mobility
+              domain can access the tools, data, and infrastructure they need to
+              bring their ideas to life. CG Yatri is not just a service — it's a
+              mobility backbone that enables collaboration across public and
+              private stakeholders for the greater good of the people of
+              Chhattisgarh
+            </p>
+            <p className="mb-6">
+              Our mission is to empower drivers with greater earnings and
+              visibility, while offering citizens a seamless travel experience.
+              By bridging the gap between demand and supply, and ensuring fair
+              and direct payments, CG Yatri creates a platform where both
+              drivers and the public support and uplift each other — with the
+              strength of community, innovation, and governance.
             </p>
 
-            {/* Buttons */}
-            <div className="flex flex-wrap gap-4">
-              {/* Download App Button */}
-              <a
-                href="/dummy-app-link.apk" // <-- Dummy download link
-                download
-                className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-xl shadow transition"
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-10 text-center">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                className="bg-blue-50 text-blue-800 p-4 rounded shadow"
               >
-                <Download size={20} />
-                Download App
-              </a>
-
-              {/* Learn More Button */}
-              <Link
-                href="/learn-more" // <-- Page where you want to redirect
-                className="flex items-center gap-2 border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white font-semibold py-3 px-6 rounded-xl shadow transition"
+                <p className="text-xl font-bold">50,000+</p>
+                <p className="text-sm">Happy Riders</p>
+              </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                className="bg-blue-50 text-blue-800 p-4 rounded shadow"
               >
-                <Info size={20} />
-                Learn More
-              </Link>
-            </div>
-          </div>
-
-          {/* Right Image */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8 }}
-            className="flex-1 flex justify-center"
-          >
-            <div className="max-w-sm w-full rounded-2xl overflow-hidden shadow-lg bg-white">
-              <Image
-                src="/bus-travel.jpg"
-                alt="Bus Travel Image"
-                width={500}
-                height={350}
-                className="w-full h-64 object-cover"
-              />
-              <div className="p-4">
-                <h3 className="text-lg font-bold text-blue-800">
-                  Coming soon to Raipur
-                </h3>
-                <p className="text-sm text-blue-600 mt-2">
-                  Launching our mobile app soon
-                </p>
-              </div>
+                <p className="text-xl font-bold">5,000+</p>
+                <p className="text-sm">Verified Drivers</p>
+              </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                className="bg-blue-50 text-blue-800 p-4 rounded shadow"
+              >
+                <p className="text-xl font-bold">20+</p>
+                <p className="text-sm">Service Providers</p>
+              </motion.div>
             </div>
           </motion.div>
-        </motion.div>
+
+          {/* Image Section */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="rounded-lg overflow-hidden"
+          >
+            <Image
+              src="/images/easyRide.svg" // Make sure this image is placed in the public folder
+              alt="Truck on highway"
+              width={750}
+              height={500}
+              className="w-full h-auto"
+            />
+          </motion.div>
+        </div>
       </section>
 
       {/* 2nd section  */}
@@ -181,7 +203,7 @@ const HeroSection = () => {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7 }}
             viewport={{ once: true }}
-            className="bg-white h-[70vh]  rounded-2xl p-6 shadow-lg hover:shadow-2xl transition"
+            className="bg-white max-h-[70vh]  rounded-2xl p-6 shadow-lg hover:shadow-2xl transition"
           >
             <Image
               //
@@ -257,7 +279,7 @@ const HeroSection = () => {
 
       {/* Footer section  */}
       <section>
-        <FooterSection/>
+        <FooterSection />
       </section>
     </div>
   );

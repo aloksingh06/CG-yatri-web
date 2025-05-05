@@ -46,6 +46,28 @@ const communityOptions = [
   },
 ];
 
+const blogs = [
+  {
+    title: "5 Essential Safety Tips for CG Yatri Drivers",
+    date: "May 5, 2025",
+    desc: "Learn how to stay safe on the road with these essential tips for drivers using the CG Yatri platform.",
+    img: "https://images.unsplash.com/photo-1586739050530-2fddeb1770d4?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    title: "Rider Safety with CG-Yatri",
+    date: "April 28, 2025",
+    desc: "Your safety is our top priority. Know how we ensure secure rides every time with verified partners.",
+    img: "https://images.unsplash.com/photo-1653463207246-1dc03899dfe0?q=80&w=1970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    title: "Why Locals Choose CG-Yatri",
+    date: "April 15, 2025",
+    desc: "Fast, affordable, and reliable — CG-Yatri is becoming the preferred choice across Chhattisgarh.",
+    img: "https://images.unsplash.com/photo-1493401415972-d4001c9fa2aa?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+];
+
+
 const JoinCommunity = () => {
   const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -74,10 +96,10 @@ const JoinCommunity = () => {
   };
 
   const images = [
-    "/community1.jpg",
-    "/community2.jpg",
-    "/community3.jpg",
-    "/community4.jpg",
+    "https://images.unsplash.com/photo-1604343670513-af01df1260a1?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "https://images.unsplash.com/photo-1640262653876-972eee988fd3?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDM2fHx8ZW58MHx8fHx8",
+    "https://images.unsplash.com/photo-1742282302316-c96c1f516776?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDMzfHx8ZW58MHx8fHx8",
+    "https://images.unsplash.com/photo-1656236866815-78ecbb5bb86d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDIzfHx8ZW58MHx8fHx8",
     "/community5.jpg",
     "/community6.jpg",
   ];
@@ -164,12 +186,10 @@ const JoinCommunity = () => {
           <div className="flex animate-scroll-fast">
             {images.map((src, idx) => (
               <div key={idx} className="inline-block mx-4">
-                <Image
+                <img
                   src={src}
                   alt="Community member"
-                  width={300}
-                  height={200}
-                  className="rounded-xl shadow-md"
+                   className="w-full h-52 object-cover"
                 />
               </div>
             ))}
@@ -255,7 +275,34 @@ const JoinCommunity = () => {
           </div>
         )}
       </section>
+{/* blog section  */}
+<section>
+<div className="bg-white min-h-screen py-12 px-4">
+      <div className="max-w-6xl mx-auto text-center">
+        <h1 className="text-4xl font-bold mb-3">CG Yatri Blog</h1>
+        <p className="text-gray-600 mb-12 max-w-2xl mx-auto">
+        Insights, tips and news for riders, drivers, and mobility service providers
+        </p>
 
+        <div className="grid gap-8 md:grid-cols-3 sm:grid-cols-2 grid-cols-1">
+          {blogs.map((blog, idx) => (
+            <div
+              key={idx}
+              className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition duration-300"
+            >
+              <img src={blog.img} alt={blog.title} className="w-full h-52 object-cover" />
+              <div className="p-5 text-left">
+                <h2 className="text-lg font-semibold text-gray-800">{blog.title}</h2>
+                <p className="text-sm text-gray-500 mb-2">{blog.date}</p>
+                <p className="text-gray-600 text-sm mb-4">{blog.desc}</p>
+                <a href="#" className="text-pink-600 text-sm font-medium hover:underline">Read More</a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+</section>
       
     </section>
     <section>

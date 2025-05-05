@@ -9,30 +9,30 @@ const Footer = () => {
   const router = useRouter();
 
   return (
-    <footer className="bg-blue-900 text-white pt-16 pb-8 px-6">
+    <footer className="bg-blue-900 text-white pt-12 pb-6 px-4 sm:px-6 md:px-12">
       {/* Download Section */}
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="flex flex-col md:flex-row md:items-center md:justify-between max-w-7xl mx-auto mb-16 gap-8"
+        className="flex flex-col md:flex-row md:items-center md:justify-between max-w-7xl mx-auto mb-12 gap-6"
       >
-        <div>
-          <h2 className="text-2xl font-bold mb-2">Download CG Yatri App</h2>
-          <p className="text-gray-300 mb-4">
+        <div className="md:max-w-xl">
+          <h2 className="text-xl font-bold mb-2">Download CG Yatri App</h2>
+          <p className="text-gray-300 mb-3 text-sm">
             The complete transport solution for Raipur - buses, autos, and cabs all in one app with live tracking and fixed fares.
           </p>
-          <div className="flex gap-4">
+          <div className="flex gap-3">
             <button
               onClick={() => window.open("https://www.apple.com/app-store/", "_blank")}
-              className="bg-black text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:opacity-80 transition"
+              className="bg-black text-white px-3 py-2 rounded-lg flex items-center gap-2 hover:opacity-80 transition text-sm"
             >
               <img src="/apple-logo.svg" alt="App Store" className="h-5 w-5" />
               App Store
             </button>
             <button
               onClick={() => window.open("https://play.google.com/store", "_blank")}
-              className="bg-black text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:opacity-80 transition"
+              className="bg-black text-white px-3 py-2 rounded-lg flex items-center gap-2 hover:opacity-80 transition text-sm"
             >
               <img src="/google-play.svg" alt="Google Play" className="h-5 w-5" />
               Google Play
@@ -40,27 +40,27 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Scan to Download Button */}
+        {/* Scan Button */}
         <button
           onClick={() => router.push("/scanner")}
-          className="bg-green-500 text-white font-semibold px-6 py-4 rounded-lg hover:bg-green-600 transition"
+          className="bg-green-500 text-white font-semibold px-5 py-3 rounded-lg hover:bg-green-600 transition text-sm"
         >
           📷 Scan to Download
           <p className="text-xs">Use your phone camera</p>
         </button>
       </motion.div>
 
-      {/* Footer Links */}
+      {/* Footer Links - Optimized for mobile */}
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-7xl mx-auto mb-8"
+        className="max-w-7xl mx-auto mb-8 grid grid-cols-1 md:grid-cols-4 gap-6"
       >
-        {/* Column 1 */}
+        {/* About Column */}
         <div>
-          <h3 className="text-lg font-bold mb-4">CG Yatri</h3>
-          <p className="text-gray-300 mb-4">
+          <h3 className="text-lg font-bold mb-3">CG Yatri</h3>
+          <p className="text-gray-300 mb-4 text-sm">
             Raipur's smart transport solution offering buses, autos, and cabs with live tracking and fixed fares.
           </p>
           <div className="flex gap-4">
@@ -76,49 +76,52 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Column 2 */}
-        <div>
-          <h3 className="text-lg font-bold mb-4">Services</h3>
-          <ul className="space-y-2 text-gray-300">
-          <li className="hover:underline cursor-pointer" onClick={() => router.push("/city-buses")}>City Buses</li>
-            <li className="hover:underline cursor-pointer" onClick={() => router.push("/auto-rickshaws")}>Auto Rickshaws</li>
-            <li className="hover:underline cursor-pointer" onClick={() => router.push("/premium-cabs")}>Premium Cabs</li>
-            <li className="hover:underline cursor-pointer" onClick={() => router.push("/monthly-passes")}>Monthly Passes</li>
-            <li className="hover:underline cursor-pointer" onClick={() => router.push("/student-discounts")}>Student Discounts</li>
-          </ul>
-        </div>
+        {/* Services + Company + Support Links (2 col on mobile) */}
+        <div className="md:col-span-3 grid grid-cols-2 sm:grid-cols-3 gap-4 text-sm">
+          {/* Services */}
+          <div>
+            <h3 className="font-bold mb-2">Services</h3>
+            <ul className="space-y-1 text-gray-300">
+              <li className="hover:underline cursor-pointer" onClick={() => router.push("/city-buses")}>City Buses</li>
+              <li className="hover:underline cursor-pointer" onClick={() => router.push("/auto-rickshaws")}>Auto Rickshaws</li>
+              <li className="hover:underline cursor-pointer" onClick={() => router.push("/premium-cabs")}>Premium Cabs</li>
+              <li className="hover:underline cursor-pointer" onClick={() => router.push("/monthly-passes")}>Monthly Passes</li>
+              <li className="hover:underline cursor-pointer" onClick={() => router.push("/student-discounts")}>Student Discounts</li>
+            </ul>
+          </div>
 
-        {/* Column 3 */}
-        <div>
-          <h3 className="text-lg font-bold mb-4">Company</h3>
-          <ul className="space-y-2 text-gray-300">
-            <li className="hover:underline cursor-pointer" onClick={() => router.push("/About")}>About Us</li>
-            <li className="hover:underline cursor-pointer" onClick={() => router.push("/careers")}>Careers</li>
-            <li className="hover:underline cursor-pointer" onClick={() => router.push("/press")}>Press</li>
-            <li className="hover:underline cursor-pointer" onClick={() => router.push("/Blog")}>Blog</li>
-            <li className="hover:underline cursor-pointer" onClick={() => router.push("/Contact")}>Contact Us</li>
-          </ul>
-        </div>
+          {/* Company */}
+          <div>
+            <h3 className="font-bold mb-2">Company</h3>
+            <ul className="space-y-1 text-gray-300">
+              <li className="hover:underline cursor-pointer" onClick={() => router.push("/About")}>About Us</li>
+              <li className="hover:underline cursor-pointer" onClick={() => router.push("/careers")}>Careers</li>
+              <li className="hover:underline cursor-pointer" onClick={() => router.push("/press")}>Press</li>
+              <li className="hover:underline cursor-pointer" onClick={() => router.push("/Blog")}>Blog</li>
+              <li className="hover:underline cursor-pointer" onClick={() => router.push("/Contact")}>Contact Us</li>
+            </ul>
+          </div>
 
-        {/* Column 4 */}
-        <div>
-          <h3 className="text-lg font-bold mb-4">Support</h3>
-          <ul className="space-y-2 text-gray-300">
-            <li className="hover:underline cursor-pointer" onClick={() => router.push("/help-center")}>Help Center</li>
-            <li className="hover:underline cursor-pointer" onClick={() => router.push("/safety")}>Safety</li>
-            <li className="hover:underline cursor-pointer" onClick={() => router.push("/community-guidelines")}>Community Guidelines</li>
-            <li className="hover:underline cursor-pointer" onClick={() => router.push("/terms-of-service")}>Terms of Service</li>
-            <li className="hover:underline cursor-pointer" onClick={() => router.push("/privacy-policy")}>Privacy Policy</li>
-          </ul>
+          {/* Support */}
+          <div>
+            <h3 className="font-bold mb-2">Support</h3>
+            <ul className="space-y-1 text-gray-300">
+              <li className="hover:underline cursor-pointer" onClick={() => router.push("/help-center")}>Help Center</li>
+              <li className="hover:underline cursor-pointer" onClick={() => router.push("/safety")}>Safety</li>
+              <li className="hover:underline cursor-pointer" onClick={() => router.push("/community-guidelines")}>Community Guidelines</li>
+              <li className="hover:underline cursor-pointer" onClick={() => router.push("/terms-of-service")}>Terms of Service</li>
+              <li className="hover:underline cursor-pointer" onClick={() => router.push("/privacy-policy")}>Privacy Policy</li>
+            </ul>
+          </div>
         </div>
       </motion.div>
 
-      {/* Bottom */}
+      {/* Bottom Line */}
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="text-center text-gray-400 text-sm"
+        className="text-center text-gray-400 text-xs sm:text-sm"
       >
         © 2025 CG Yatri. All rights reserved. Made with ❤️ for Raipur
       </motion.div>

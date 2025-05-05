@@ -86,7 +86,7 @@ const Navbar = () => {
         <Link href="/About" className={getLinkClass("/About")}>About</Link>
         <Link href="/Services" className={getLinkClass("/Services")}>Services</Link>
         <Link href="/Plan" className={getLinkClass("/Plan")}>Plan</Link>
-        <Link href="/Blog" className={getLinkClass("/Blog")}>Blog</Link>
+        {/* <Link href="/Blog" className={getLinkClass("/Blog")}>Blog</Link> */}
         <Link href="/Community" className={getLinkClass("/Community")}>Community</Link>
         <Link href="/Contact" className={getLinkClass("/Contact")}>Contact Us</Link>
 
@@ -144,7 +144,7 @@ const Navbar = () => {
       <Link href="/About" className={getLinkClass("/About")} onClick={() => setIsOpen(false)}>About</Link>
       <Link href="/Services" className={getLinkClass("/Services")} onClick={() => setIsOpen(false)}>Services</Link>
       <Link href="/Plan" className={getLinkClass("/Plan")} onClick={() => setIsOpen(false)}>Plan</Link>
-      <Link href="/Blog" className={getLinkClass("/Blog")} onClick={() => setIsOpen(false)}>Blog</Link>
+      {/* <Link href="/Blog" className={getLinkClass("/Blog")} onClick={() => setIsOpen(false)}>Blog</Link> */}
       <Link href="/Community" className={getLinkClass("/Community")} onClick={() => setIsOpen(false)}>Community</Link>
       <Link href="/Contact" className={getLinkClass("/Contact")} onClick={() => setIsOpen(false)}>Contact Us</Link>
 
