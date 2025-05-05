@@ -7,7 +7,7 @@ import api from "@/utils/api";
 import { toast } from "react-toastify";
 
 const Profile = () => {
-  const { user, isAuthenticated } = useContext(AuthContext);
+  const { user, isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
   const router = useRouter();
 
 
