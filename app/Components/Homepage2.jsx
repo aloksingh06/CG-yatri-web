@@ -391,7 +391,56 @@ const [error, setError] = useState('');
           <h2 className="text-4xl font-bold text-center mb-6">
             Book Your Ride
           </h2>
+ {/* 3rd section (popular routes) */}
+ <section className="md:py-5 py-4">
+        <div className="md:max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="flex justify-between items-center mb-6 flex-wrap gap-2">
+            <h2 className="text-xl sm:text-xl font-semibold sm:font-bold">
+              Popular Routes in Raipur
+            </h2>
+            <a
+              href="#"
+              className="text-blue-600 hover:underline text-sm font-semibold"
+            >
+              View All Routes →
+            </a>
+          </div>
 
+          {/* Cards and Scroll Button Container */}
+          <div className="relative">
+            {/* Horizontal Scroll Container */}
+            <div
+              ref={scrollRef}
+              className="flex space-x-4 sm:space-x-6 overflow-x-auto pb-4 scrollbar-hide scroll-smooth"
+            >
+              {routes.map((route, index) => (
+                <div
+                  key={index}
+                  className="min-w-[250px] sm:min-w-[300px] bg-white p-4 sm:p-4 rounded-lg shadow hover:shadow-lg transition duration-300 cursor-pointer"
+                >
+                  <h3 className="text-md sm:text-lg font-semibold mb-2">
+                    {route.from} to {route.to}
+                  </h3>
+                  <p className="text-gray-600 text-sm ">
+                    Bus: {route.bus} | Auto: {route.auto} | Cab: {route.cab}
+                  </p>
+                  {/* <div className="flex justify-end">
+                    <ArrowRight className="text-blue-600" />
+                  </div> */}
+                </div>
+              ))}
+            </div>
+
+            {/* Scroll Right Button */}
+            <button
+              onClick={handleScrollRight}
+              className="absolute -right-3 sm:-right-6 top-1/2 -translate-y-1/2 bg-blue-600 shadow p-2 rounded-full hover:bg-blue-800 transition z-10"
+            >
+              <ArrowRight className="text-white" />
+            </button>
+          </div>
+        </div>
+      </section>
           <div className="flex flex-col md:flex-row gap-4 mb-4">
             {/* From Input */}
             <div className="relative w-full md:w-1/2">
@@ -550,56 +599,7 @@ const [error, setError] = useState('');
       <div className="  mx-1 " >
       <hr className="my-6 border-t border-gray-500  block md:hidden" />
       </div>
-      {/* 3rd section (popular routes) */}
-      <section className="md:py-24 py-4">
-        <div className="md:max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="flex justify-between items-center mb-6 flex-wrap gap-2">
-            <h2 className="text-xl sm:text-2xl font-bold">
-              Popular Routes in Raipur
-            </h2>
-            <a
-              href="#"
-              className="text-blue-600 hover:underline text-sm font-semibold"
-            >
-              View All Routes →
-            </a>
-          </div>
-
-          {/* Cards and Scroll Button Container */}
-          <div className="relative">
-            {/* Horizontal Scroll Container */}
-            <div
-              ref={scrollRef}
-              className="flex space-x-4 sm:space-x-6 overflow-x-auto pb-4 scrollbar-hide scroll-smooth"
-            >
-              {routes.map((route, index) => (
-                <div
-                  key={index}
-                  className="min-w-[250px] sm:min-w-[300px] bg-white p-4 sm:p-5 rounded-lg shadow hover:shadow-lg transition duration-300 cursor-pointer"
-                >
-                  <h3 className="text-md sm:text-lg font-semibold mb-2">
-                    {route.from} to {route.to}
-                  </h3>
-                  <p className="text-gray-600 text-sm mb-4">
-                    Bus: {route.bus} | Auto: {route.auto} | Cab: {route.cab}
-                  </p>
-                  <div className="flex justify-end">
-                    <ArrowRight className="text-blue-600" />
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Scroll Right Button */}
-            <button
-              onClick={handleScrollRight}
-              className="absolute -right-3 sm:-right-6 top-1/2 -translate-y-1/2 bg-blue-600 shadow p-2 rounded-full hover:bg-blue-800 transition z-10"
-            >
-              <ArrowRight className="text-white" />
-            </button>
-          </div>
-        </div>
-      </section>
+     
       <div className="  mx-6 " >
       <hr className="my-6 border-t border-gray-500  block md:hidden" />
       </div>
