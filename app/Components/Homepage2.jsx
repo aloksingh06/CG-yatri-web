@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -14,6 +14,7 @@ import {
   FaParking,
   FaTaxi,
   FaSearch,
+  FaMapSigns, FaRupeeSign,
 } from "react-icons/fa";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
@@ -21,18 +22,29 @@ import { Listbox } from "@headlessui/react";
 import { HiSelector } from "react-icons/hi";
 import { useRouter } from "next/navigation";
 import ServiceProviderModal from "./ServiceProviderModal";
+import axios from "axios";
+import api from "@/utils/api";
 
 const RAIPUR_ROUTES = [
   "Raipur Railway Station",
-  "Swami Vivekanand Airport",
   "Telibandha",
-  "Pandri Market",
-  "Shankar Nagar",
-  "Kachna Road",
-  "Amlidih",
-  "Mowa",
-  "VIP Road",
-  "Devendra Nagar",
+  "Sector 15",
+  "CBD",
+  "North Block",
+  "Mahanadi Bhawan",
+  "Indravati Bhawan",
+  "South Block",
+  "Sector 27",
+  "Sector 29",
+  "HNLU",
+  "Nawagaon",
+  "Stadium",
+  "Satya Sai Hospital",
+  "Sector 12",
+  "Vedanta Hospital",
+  "Jungle Safari",
+  "IIIT",
+  "Muktangan"
 ];
 const SERVICES = [
   {
@@ -290,6 +302,8 @@ const BookRideSection = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [serviceProviderData, setServiceProviderData] = useState(null);
+  const [fare, setFare] = useState(null);
+const [error, setError] = useState('');
   const router2 = useRouter();
 
   const handleSave = (data) => {
@@ -315,9 +329,9 @@ const BookRideSection = () => {
     setShowSuggestions((prev) => ({ ...prev, to: false }));
   };
 
-  const handleSearch = () => {
-    router.push("/available-services");
-  };
+  // const handleSearch = () => {
+  //   router.push("/available-services");
+  // };
 
   // for right scrolling in popular route
   const scrollRef = useRef();
@@ -333,6 +347,37 @@ const BookRideSection = () => {
     setActiveIndex((prevIndex) => (prevIndex === index ? null : index));
   };
 
+
+
+  // search function 
+  const handleSearch = async () => {
+    setError('');
+    setFare(null);
+  
+    try {
+      const response = await api.get('/api/fare', {
+        params: { 
+          from: from,
+          to: to,
+        }
+      });
+  
+      if (response.data && response.data.fare !== undefined) {
+        setFare(response.data.fare);
+      } else {
+        setError(response.data.error || 'Fare not found');
+      }
+    } catch (err) {
+      if (err.response && err.response.data?.error) {
+        setError(err.response.data.error);
+      } else {
+        setError('Failed to fetch fare. Please try again.');
+      }
+    }
+  };
+   // Auto call when both 'from' and 'to' are filled
+   
+  
   return (
     <div className="bg-blue-100">
       {/* book your ride section 2nd section */}
@@ -421,12 +466,50 @@ const BookRideSection = () => {
           ? "bg-blue-600 text-white hover:bg-blue-700"
           : "bg-gray-300 text-gray-500 cursor-not-allowed"
       }`}
+      
               >
                 <FaSearch className="mr-2" /> Search
               </button>
-            </div>
-          </div>
 
+              {/* fare show */}
+             
+
+{error && (
+  <div className="text-center mt-4">
+    <p className="text-red-500">{error}</p>
+  </div>
+)}
+
+            </div>
+            
+          </div>
+          {fare !== null && (
+  <div className="flex justify-center  my-8">
+      <motion.div
+      whileHover={{ scale: 1.03 }}
+    
+      className="md:w-1/2 flex items-center justify-between p-4 border border-gray-200 rounded-xl shadow-sm cursor-pointer bg-white hover:bg-green-50 transition"
+    >
+      <div className="flex items-center gap-4">
+        <div className="text-green-600 text-xl">
+          <FaBus />
+        </div>
+        <div>
+          <p className="font-semibold text-gray-800">From: {from}</p>
+          <p className="text-sm text-gray-500 flex items-center gap-1">
+            <FaMapSigns className="text-gray-400" />
+            To: {to}
+          </p>
+        </div>
+      </div>
+
+      <div className="flex items-center gap-2 text-green-700 font-bold text-lg">
+        <FaRupeeSign />
+        {fare}
+      </div>
+    </motion.div>
+  </div>
+)}
           {/* Services */}
           <h3 className="text-2xl font-bold text-center mb-6"> Services</h3>
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-6">
