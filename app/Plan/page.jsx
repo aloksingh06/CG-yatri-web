@@ -105,19 +105,19 @@ const FAQPage = () => {
   return (
     <div className="container mx-auto p-4 sm:p-6 lg:p-12 min-h-screen">
       {/* Hero Section */}
-      <div className="bg-[#9cd6ff] rounded-3xl p-6 mt-16 sm:p-10 lg:p-16 flex flex-col md:flex-row items-center justify-between shadow-lg">
+      <div className="w-full bg-blue-600 rounded-3xl p-6 mt-16 sm:p-10 lg:p-16 flex flex-col md:flex-row items-center justify-between shadow-lg">
         <div className="md:w-1/2 space-y-4 text-center md:text-left">
-          <h1 className="text-3xl sm:text-4xl font-bold text-black">
+          <h1 className="text-3xl sm:text-4xl font-bold text-white">
             CG Yatri Driver & Rider Plan
           </h1>
-          <p className="text-gray-800 text-base">
+          <p className="text-gray-200 text-base">
             To ensure CG Yatri remains a reliable, zero-commission mobility
             platform, we’ve introduced affordable plans for both drivers and
             riders.
           </p>
           <div className="space-y-1">
-            <p className="text-green-600 font-medium">✅ Zero Commission</p>
-            <p className="text-green-600 font-medium">
+            <p className="text-blue-200 font-medium">✅ Zero Commission</p>
+            <p className="text-blue-200 font-medium">
               ✅ Pay only if you take a ride
             </p>
           </div>
@@ -125,7 +125,7 @@ const FAQPage = () => {
         <div className="md:w-1/2 flex justify-center mt-6 md:mt-0">
           <div className="bg-white w-[90%] sm:w-[80%] h-[220px] sm:h-[280px] md:h-[320px] rounded-3xl shadow-md overflow-hidden flex items-center justify-center">
             <img
-              src="/images/plan_hero_section.jpg"
+              src="/images/plan1.jpg"
               alt="Plan Hero Section"
               className="w-full h-full object-cover rounded-2xl transition-transform duration-500 hover:scale-105"
             />

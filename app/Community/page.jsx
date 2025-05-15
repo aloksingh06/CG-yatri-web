@@ -5,15 +5,13 @@ import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import FooterSection from '../Components/FooterSection'
-
-
+import FooterSection from '../Components/FooterSection';
 import {
   FaCar,
   FaUsers,
   FaHandHoldingHeart,
   FaMapMarkedAlt,
-} from "react-icons/fa"; // icons
+} from "react-icons/fa";
 
 const communityOptions = [
   {
@@ -51,22 +49,29 @@ const blogs = [
     title: "5 Essential Safety Tips for CG Yatri Drivers",
     date: "May 5, 2025",
     desc: "Learn how to stay safe on the road with these essential tips for drivers using the CG Yatri platform.",
-    img: "https://images.unsplash.com/photo-1586739050530-2fddeb1770d4?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    img: "https://images.unsplash.com/photo-1586739050530-2fddeb1770d4?q=80&w=2070&auto=format&fit=crop",
   },
   {
     title: "Rider Safety with CG-Yatri",
     date: "April 28, 2025",
     desc: "Your safety is our top priority. Know how we ensure secure rides every time with verified partners.",
-    img: "https://images.unsplash.com/photo-1653463207246-1dc03899dfe0?q=80&w=1970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    img: "https://images.unsplash.com/photo-1653463207246-1dc03899dfe0?q=80&w=1970&auto=format&fit=crop",
   },
   {
     title: "Why Locals Choose CG-Yatri",
     date: "April 15, 2025",
     desc: "Fast, affordable, and reliable — CG-Yatri is becoming the preferred choice across Chhattisgarh.",
-    img: "https://images.unsplash.com/photo-1493401415972-d4001c9fa2aa?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    img: "https://images.unsplash.com/photo-1493401415972-d4001c9fa2aa?q=80&w=2070&auto=format&fit=crop",
   },
 ];
 
+const images = [
+  "https://images.unsplash.com/photo-1604343670513-af01df1260a1?q=80&w=1974&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1640262653876-972eee988fd3?w=600&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1742282302316-c96c1f516776?w=600&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1656236866815-78ecbb5bb86d?w=600&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1709304815991-b67cdaf889c7?q=80&w=2073&auto=format&fit=crop",
+];
 
 const JoinCommunity = () => {
   const router = useRouter();
@@ -85,7 +90,6 @@ const JoinCommunity = () => {
     e.preventDefault();
     console.log("Form submitted!", { name, email, role: selectedRole });
 
-    // Form submit ke baad redirect based on role
     if (selectedRole === "User") {
       router.push("/join/user");
     } else if (selectedRole === "Driver") {
@@ -95,20 +99,25 @@ const JoinCommunity = () => {
     }
   };
 
-  const images = [
-    "https://images.unsplash.com/photo-1604343670513-af01df1260a1?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "https://images.unsplash.com/photo-1640262653876-972eee988fd3?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDM2fHx8ZW58MHx8fHx8",
-    "https://images.unsplash.com/photo-1742282302316-c96c1f516776?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDMzfHx8ZW58MHx8fHx8",
-    "https://images.unsplash.com/photo-1656236866815-78ecbb5bb86d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDIzfHx8ZW58MHx8fHx8",
-    "/community5.jpg",
-    "/community6.jpg",
-  ];
-
   return (
     <>
-    <section className="py-16 px-6 mt-10 bg-blue-100 text-center">
-      {/* 1st section */}
-      <section>
+      <style jsx global>{`
+        @keyframes scrollLoop {
+          0% {
+            transform: translateX(0%);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+        .scroll-loop {
+          display: flex;
+          width: max-content;
+          animation: scrollLoop 25s linear infinite;
+        }
+      `}</style>
+
+      <section className="py-16 px-6 mt-10 bg-blue-100 text-center">
         <motion.div
           initial={{ opacity: 0, y: -30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -121,8 +130,7 @@ const JoinCommunity = () => {
           <p className="text-gray-600 max-w-2xl mx-auto mb-12">
             We're building a vibrant network of riders, drivers, volunteers, and
             transport supporters working together to create better commuting
-            experiences across our cities. Your participation makes a
-            difference!
+            experiences across our cities. Your participation makes a difference!
           </p>
         </motion.div>
 
@@ -149,9 +157,7 @@ const JoinCommunity = () => {
         </div>
       </section>
 
-      {/* 2nd section  */}
       <section className="bg-blue-50 mt-10 rounded-xl py-16 px-6">
-        {/* Top Blue Box */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -176,35 +182,31 @@ const JoinCommunity = () => {
           </button>
         </motion.div>
 
-        {/* Image Scroller */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
-          className="overflow-hidden whitespace-nowrap"
+          className="overflow-hidden"
         >
-          <div className="flex animate-scroll-fast">
-            {images.map((src, idx) => (
-              <div key={idx} className="inline-block mx-4">
+          <div className="scroll-loop">
+            {[...images, ...images].map((src, idx) => (
+              <div key={idx} className="w-60 mx-2">
                 <img
                   src={src}
                   alt="Community member"
-                   className="w-full h-52 object-cover"
+                  className="w-full h-52 object-cover rounded-xl"
                 />
               </div>
             ))}
           </div>
         </motion.div>
 
-        {/* Modal */}
         {isModalOpen && (
           <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
             <div className="bg-white rounded-2xl p-8 w-80 text-center">
               {!showForm ? (
                 <>
-                  <h3 className="text-xl font-bold mb-6 text-blue-700">
-                    Join as
-                  </h3>
+                  <h3 className="text-xl font-bold mb-6 text-blue-700">Join as</h3>
                   <div className="flex flex-col gap-4">
                     <button
                       onClick={() => handleRoleSelect("User")}
@@ -275,119 +277,37 @@ const JoinCommunity = () => {
           </div>
         )}
       </section>
-{/* blog section  */}
-<section>
-<div className="bg-white min-h-screen py-12 px-4">
-      <div className="max-w-6xl mx-auto text-center">
-        <h1 className="text-4xl font-bold mb-3">CG Yatri Blog</h1>
-        <p className="text-gray-600 mb-12 max-w-2xl mx-auto">
-        Insights, tips and news for riders, drivers, and mobility service providers
-        </p>
 
-        <div className="grid gap-8 md:grid-cols-3 sm:grid-cols-2 grid-cols-1">
-          {blogs.map((blog, idx) => (
-            <div
-              key={idx}
-              className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition duration-300"
-            >
-              <img src={blog.img} alt={blog.title} className="w-full h-52 object-cover" />
-              <div className="p-5 text-left">
-                <h2 className="text-lg font-semibold text-gray-800">{blog.title}</h2>
-                <p className="text-sm text-gray-500 mb-2">{blog.date}</p>
-                <p className="text-gray-600 text-sm mb-4">{blog.desc}</p>
-                <a href="#" className="text-pink-600 text-sm font-medium hover:underline">Read More</a>
+      <section className="bg-white min-h-screen py-12 px-4">
+        <div className="max-w-6xl mx-auto text-center">
+          <h1 className="text-4xl font-bold mb-3">CG Yatri Blog</h1>
+          <p className="text-gray-600 mb-12 max-w-2xl mx-auto">
+            Insights, tips and news for riders, drivers, and mobility service providers
+          </p>
+          <div className="grid gap-8 md:grid-cols-3 sm:grid-cols-2 grid-cols-1">
+            {blogs.map((blog, idx) => (
+              <div
+                key={idx}
+                className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition duration-300"
+              >
+                <img src={blog.img} alt={blog.title} className="w-full h-52 object-cover" />
+                <div className="p-5 text-left">
+                  <h2 className="text-lg font-semibold text-gray-800">{blog.title}</h2>
+                  <p className="text-sm text-gray-500 mb-2">{blog.date}</p>
+                  <p className="text-gray-600 text-sm mb-4">{blog.desc}</p>
+                  <a href="#" className="text-pink-600 text-sm font-medium hover:underline">Read More</a>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
-    </div>
-</section>
-      
-    </section>
-    <section>
-        <FooterSection/>
+      </section>
+
+      <section>
+        <FooterSection />
       </section>
     </>
-    
   );
 };
 
 export default JoinCommunity;
-
-// import React from 'react'
-// import ScrollableSection from '../Components/ScrollableSection'
-
-// import {blogData} from "../data"
-// import JoinSection from '../Components/JoinSection'
-
-// const Community = () => {
-//   return (
-//     <div>
-//       <div className="bg-[#9cd6ff] rounded-3xl py-10 sm:py-10 md:py-20 px-10 sm:px-10 md:px-28 flex flex-col md:flex-row items-center md:items-start justify-between ">
-
-//         {/* Left Side Content */}
-//         <div className="md:w-1/2 w-full space-y-6 text-center md:text-left">
-//           <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-black leading-tight">
-//           CG Yatri Driver & Rider Plan
-//           </h1>
-//           <p className="text-base sm:text-lg text-gray-800">
-//           CG Yatri isn’t just a travel app — it’s a community-driven initiative that brings together the people of Chhattisgarh under one platform. Our mission is to empower local drivers by giving them a fair and commission-free system, and to provide commuters with a smarter, safer, and more reliable travel experience. From Raipur’s busy streets to smaller towns, CG Yatri connects you with trusted local transport, making every ride feel personal, direct, and meaningful. We believe real change starts from the ground up — and with your support, we’re building a better way to move.
-//           </p>
-
-//         <div>
-//           <h1>✅Zero Commission</h1>
-//           <h1>✅pay only if you take ride</h1>
-
-//         </div>
-
-//         </div>
-
-//         {/* Right Side Image Box */}
-//         <div className="md:w-1/2 w-full flex justify-end items-end">
-//           <div className="bg-white w-[100%] sm:w-[20vw] h-[30vw] sm:h-[20vw] rounded-3xl shadow-md flex items-center justify-center">
-//             {/* Replace this with actual image if needed */}
-//             <span className="text-gray-400">Image here</span>
-//             {/* Example:
-//             <Image src="/bus-map.png" alt="Map" width={300} height={300} className="rounded-3xl object-cover" />
-//             */}
-//           </div>
-//         </div>
-//       </div>
-//       <div className=" rounded-3xl py-10 sm:py-10 md:py-20 px-10 sm:px-10 md:px-28 flex flex-col md:flex-row items-center md:items-start justify-between ">
-
-//         {/* Left Side Content */}
-//         <div className="md:w-1/2 w-full space-y-6 text-center md:text-left">
-//           <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-black leading-tight">
-//           Meet (driver-name for review), an Auto Driver from Raipur
-//           </h1>
-//           <p className="text-base sm:text-lg text-gray-800">
-//           Earlier, I had to rely on agents and lost a share of my earnings. With CG Yatri, I get paid directly by customers. It’s simple, and I feel more independent
-//           </p>
-
-//         </div>
-
-//         {/* Right Side Image Box */}
-//         <div className="md:w-1/2 w-full flex justify-end items-end">
-//           <div className="bg-white w-[100%] sm:w-[20vw] h-[30vw] sm:h-[20vw] rounded-3xl shadow-md flex items-center justify-center">
-//             {/* Replace this with actual image if needed */}
-//             <span className="text-gray-400">Image here</span>
-//             {/* Example:
-//             <Image src="/bus-map.png" alt="Map" width={300} height={300} className="rounded-3xl object-cover" />
-//             */}
-//           </div>
-//         </div>
-//       </div>
-//     <div className='bg-[#9cd6ff] py-10 sm:py-10 md:py-20 px-10 sm:px-10 md:px-28'>
-//          <h1 className='text-3xl font-semibold mb-5'>Feedback: What Our Riders Say</h1>
-
-//          <ScrollableSection Data={blogData}/>
-//     </div>
-//     <div>
-//       <JoinSection />
-//     </div>
-//     </div>
-//   )
-// }
-
-// export default Community

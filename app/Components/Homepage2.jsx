@@ -604,7 +604,11 @@ const [error, setError] = useState('');
       <hr className="my-6 border-t border-gray-500  block md:hidden" />
       </div>
       {/* 4th section (real time tracking) */}
+<<<<<<< Updated upstream
       <section className="md:py-12 w-full  py-2  mb-1">
+=======
+      <section className="md:py-12 w-full h-screen bg-red-500 py-2  mb-12">
+>>>>>>> Stashed changes
         <div className="w-full mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center gap-10 md:gap-32">
           {/* Left Side - Map Box */}
           <div className="bg-blue-50 p-2 rounded-2xl shadow-lg w-full md:w-[70vw] h-64 md:h-[56vh]">
