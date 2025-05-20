@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.cgyatri.in
+
+# Sitemaps
+Sitemap: https://www.cgyatri.in/sitemap.xml
