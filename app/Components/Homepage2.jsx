@@ -605,6 +605,8 @@ const [error, setError] = useState('');
       </div>
       {/* 4th section (real time tracking) */}
       <section className="md:py-12 w-full  py-2  mb-1">
+
+
         <div className="w-full mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center gap-10 md:gap-32">
           {/* Left Side - Map Box */}
           <div className="bg-blue-50 p-2 rounded-2xl shadow-lg w-full md:w-[70vw] h-64 md:h-[56vh]">
