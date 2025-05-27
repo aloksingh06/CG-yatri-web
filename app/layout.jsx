@@ -27,7 +27,6 @@ export default function RootLayout({ children }) {
       <Head>
       <link rel="icon" href="/favicon.ico" />
   <link rel="icon" type="image/png" href="/favicon.png" />
-        <meta name="google-site-verification" content="hqLTqraixEDvuIrdLX0_PTQN5Z7bNrQQQhWYNBSaXPw" />
         </Head>
       <body>
         <Providers>
